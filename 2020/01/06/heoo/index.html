@@ -118,12 +118,14 @@
 
 
 
-<meta name="description" content="SNHGB">
-<meta property="og:type" content="website">
-<meta property="og:title" content="SNH">
-<meta property="og:url" content="http://xuqilong.com/index.html">
+<meta name="description" content="一、django中配置MongoDB1、在Djnago中使用MongoDB数据库时，使用mongoengine模块。1pip install  mongoengine  2、在settings中配置数据库连接如下：1234567## 一、django中配置MongoDB##### 1、在Djnago中使用MongoDB数据库时，使用mongoengine模块。​ pip install  mong">
+<meta property="og:type" content="article">
+<meta property="og:title" content="你好">
+<meta property="og:url" content="http://xuqilong.com/2020/01/06/heoo/index.html">
 <meta property="og:site_name" content="SNH">
-<meta property="og:description" content="SNHGB">
+<meta property="og:description" content="一、django中配置MongoDB1、在Djnago中使用MongoDB数据库时，使用mongoengine模块。1pip install  mongoengine  2、在settings中配置数据库连接如下：1234567## 一、django中配置MongoDB##### 1、在Djnago中使用MongoDB数据库时，使用mongoengine模块。​ pip install  mong">
+<meta property="article:published_time" content="2020-01-06T13:00:02.869Z">
+<meta property="article:modified_time" content="2020-01-06T14:26:26.009Z">
 <meta property="article:author" content="xuqilong">
 <meta name="twitter:card" content="summary">
 
@@ -155,13 +157,13 @@
 
 
 
-  <link rel="canonical" href="http://xuqilong.com/"/>
+  <link rel="canonical" href="http://xuqilong.com/2020/01/06/heoo/"/>
 
 
 
 
 
-  <title>SNH</title>
+  <title>你好 | SNH</title>
   
 
 
@@ -180,8 +182,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -328,9 +329,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -360,9 +361,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/01/06/heoo/" itemprop="url">你好</a></h1>
+          <h1 class="post-title" itemprop="name headline">你好</h1>
         
 
         <div class="post-meta">
@@ -431,196 +430,104 @@
       
 
       
-        
-          
-          一、django中配置MongoDB1、在Djnago中使用MongoDB数据库时，使用mongoengine模块。1pip install  mongoengine
+        <h2 id="一、django中配置MongoDB"><a href="#一、django中配置MongoDB" class="headerlink" title="一、django中配置MongoDB"></a>一、django中配置MongoDB</h2><h5 id="1、在Djnago中使用MongoDB数据库时，使用mongoengine模块。"><a href="#1、在Djnago中使用MongoDB数据库时，使用mongoengine模块。" class="headerlink" title="1、在Djnago中使用MongoDB数据库时，使用mongoengine模块。"></a>1、在Djnago中使用MongoDB数据库时，使用mongoengine模块。</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install  mongoengine</span><br></pre></td></tr></table></figure>
 
-2、在settings中配置数据库连接如下：1234567## 一、django中配置MongoDB##### 1、在Djnago
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2020/01/06/heoo/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
+<h5 id="2、在settings中配置数据库连接如下："><a href="#2、在settings中配置数据库连接如下：" class="headerlink" title="2、在settings中配置数据库连接如下："></a>2、在settings中配置数据库连接如下：</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 一、django中配置MongoDB</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">##### 1、在Djnago中使用MongoDB数据库时，使用mongoengine模块。</span></span><br><span class="line"></span><br><span class="line">​</span><br></pre></td></tr></table></figure>
+<p>pip install  mongoengine<br>​```</p>
+<h5 id="2、在settings中配置数据库连接如下：-1"><a href="#2、在settings中配置数据库连接如下：-1" class="headerlink" title="2、在settings中配置数据库连接如下："></a>2、在settings中配置数据库连接如下：</h5><p>​<code>python
+DATABASES = {
+    &#39;default&#39;: {
+        # &#39;ENGINE&#39;: &#39;django.db.backends.sqlite3&#39;,
+        # &#39;NAME&#39;: os.path.join(BASE_DIR, &#39;db.sqlite3&#39;),
+        &#39;ENGINE&#39;: None
+    }
+}
+from mongoengine import connect, register_connection
+connect(&#39;dj_test&#39;, host=&#39;47.106.249.200&#39;, port=443)
+​</code></p>
+<ul>
+<li>注释掉sqlite3数据库，加上MongoDB配置。</li>
+<li>name：mongodb数据库名字，host：mongodb数据库ip，port：数据库相应的端口。</li>
+</ul>
+<h5 id="3、当需要连接多个MongoDB时：一要在settings中增加数据库连接；二要在models中定义的表中指明使用的数据库。"><a href="#3、当需要连接多个MongoDB时：一要在settings中增加数据库连接；二要在models中定义的表中指明使用的数据库。" class="headerlink" title="3、当需要连接多个MongoDB时：一要在settings中增加数据库连接；二要在models中定义的表中指明使用的数据库。"></a>3、当需要连接多个MongoDB时：一要在settings中增加数据库连接；二要在models中定义的表中指明使用的数据库。</h5><ul>
+<li>settings配置如下：</li>
+</ul>
+<p>​<code>python
+from mongoengine import connect
+connect(&#39;name1&#39;, host=&#39;127.0.0.1&#39;, port=27017， alias=&#39;default&#39;)
+connect(&#39;name2&#39;, host=&#39;127.0.0.1&#39;, port=27017， alias=&#39;database2&#39;)
+​</code></p>
+<blockquote>
+<p>当连接多个数据库时，需要添加alias参数，用于给多个数据库取别名，而且必须有一个default，不指定表使用库时，默认使用default库。</p>
+</blockquote>
+<ul>
+<li>models.py：</li>
+</ul>
+<p>​```python<br>from mongoengine import *<br>class Test(Document):<br>    name = StringField()<br>    age = IntField()</p>
+<pre><code>meta = {&apos;db_alias&apos;: &apos;database2&apos;}</code></pre><p>​```</p>
+<p><strong>注意：设置表要使用的库，添加元素meta，指定db_alias(key)的value值就可以，其中的value值为settings配置的数据库别名。</strong></p>
+<h2 id="二、操作MongoDB"><a href="#二、操作MongoDB" class="headerlink" title="二、操作MongoDB"></a>二、操作MongoDB</h2><h5 id="1、MongoDB支持的数据类型"><a href="#1、MongoDB支持的数据类型" class="headerlink" title="1、MongoDB支持的数据类型"></a>1、MongoDB支持的数据类型</h5><p>fileds.py:</p>
+<p>​<code>python
+    &#39;StringField&#39;, &#39;URLField&#39;, &#39;EmailField&#39;, &#39;IntField&#39;, &#39;LongField&#39;,
+    &#39;FloatField&#39;, &#39;DecimalField&#39;, &#39;BooleanField&#39;, &#39;DateTimeField&#39;, &#39;DateField&#39;,
+    &#39;ComplexDateTimeField&#39;, &#39;EmbeddedDocumentField&#39;, &#39;ObjectIdField&#39;,
+    &#39;GenericEmbeddedDocumentField&#39;, &#39;DynamicField&#39;, &#39;ListField&#39;,
+    &#39;SortedListField&#39;, &#39;EmbeddedDocumentListField&#39;, &#39;DictField&#39;,
+    &#39;MapField&#39;, &#39;ReferenceField&#39;, &#39;CachedReferenceField&#39;,
+    &#39;LazyReferenceField&#39;, &#39;GenericLazyReferenceField&#39;,
+    &#39;GenericReferenceField&#39;, &#39;BinaryField&#39;, &#39;GridFSError&#39;, &#39;GridFSProxy&#39;,
+    &#39;FileField&#39;, &#39;ImageGridFsProxy&#39;, &#39;ImproperlyConfigured&#39;, &#39;ImageField&#39;,
+    &#39;GeoPointField&#39;, &#39;PointField&#39;, &#39;LineStringField&#39;, &#39;PolygonField&#39;,
+    &#39;SequenceField&#39;, &#39;UUIDField&#39;, &#39;MultiPointField&#39;, &#39;MultiLineStringField&#39;,
+    &#39;MultiPolygonField&#39;, &#39;GeoJsonBaseField&#39;
+​</code></p>
+<h5 id="2、增删改查"><a href="#2、增删改查" class="headerlink" title="2、增删改查"></a>2、增删改查</h5><p>models.py</p>
+<p>​```python<br>import mongoengine</p>
+<p>class StudentModel(mongoengine.Document):<br>    name = mongoengine.StringField(max_length=16)<br>    age = mongoengine.IntField(default=0)</p>
+<p>​```</p>
+<p>view.py</p>
+<p>​```python<br>from django.shortcuts import render, HttpResponse<br>from .models import StudentModel<br>from django.views.generic import View</p>
+<p>def add(request):<br>    StudentModel.objects.create(name=’小明’, age=8)<br>    return HttpResponse(‘创建成功’)</p>
+<p>def find(request):<br>    result = StudentModel.objects.filter(name=’小明’)<br>    print(result[0].name)<br>    return HttpResponse(result[0].name)</p>
+<p>def update(request):<br>    result = StudentModel.objects.filter(name=’小明’).first().update(name=’小红’)<br>    print(result)<br>    return HttpResponse(result)</p>
+<p>def delete(request):<br>    result = StudentModel.objects.filter(name=’小红’).first().delete()<br>    print(result)<br>    return HttpResponse(result)<br>​```</p>
+<p>DATABASES = {<br>    ‘default’: {<br>        # ‘ENGINE’: ‘django.db.backends.sqlite3’,<br>        # ‘NAME’: os.path.join(BASE_DIR, ‘db.sqlite3’),<br>        ‘ENGINE’: None<br>    }<br>}<br>from mongoengine import connect, register_connection<br>connect(‘dj_test’, host=’47.106.249.200’, port=443)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 注释掉sqlite3数据库，加上MongoDB配置。</span><br><span class="line"></span><br><span class="line">- name：mongodb数据库名字，host：mongodb数据库ip，port：数据库相应的端口。</span><br><span class="line"></span><br><span class="line">#####     3、当需要连接多个MongoDB时：一要在settings中增加数据库连接；二要在models中定义的表中指明使用的数据库。</span><br><span class="line"></span><br><span class="line">- settings配置如下：</span><br><span class="line"></span><br><span class="line">&#96;&#96;&#96;python</span><br><span class="line">from mongoengine import connect</span><br><span class="line">connect(&#39;name1&#39;, host&#x3D;&#39;127.0.0.1&#39;, port&#x3D;27017， alias&#x3D;&#39;default&#39;)</span><br><span class="line">connect(&#39;name2&#39;, host&#x3D;&#39;127.0.0.1&#39;, port&#x3D;27017， alias&#x3D;&#39;database2&#39;)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>当连接多个数据库时，需要添加alias参数，用于给多个数据库取别名，而且必须有一个default，不指定表使用库时，默认使用default库。</p>
+</blockquote>
+<ul>
+<li>models.py：</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> mongoengine <span class="keyword">import</span> *</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test</span><span class="params">(Document)</span>:</span></span><br><span class="line">    name = StringField()</span><br><span class="line">    age = IntField()</span><br><span class="line">    </span><br><span class="line">    meta = &#123;<span class="string">'db_alias'</span>: <span class="string">'database2'</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：设置表要使用的库，添加元素meta，指定db_alias(key)的value值就可以，其中的value值为settings配置的数据库别名。</strong></p>
+<h2 id="二、操作MongoDB-1"><a href="#二、操作MongoDB-1" class="headerlink" title="二、操作MongoDB"></a>二、操作MongoDB</h2><h5 id="1、MongoDB支持的数据类型-1"><a href="#1、MongoDB支持的数据类型-1" class="headerlink" title="1、MongoDB支持的数据类型"></a>1、MongoDB支持的数据类型</h5><p>fileds.py:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'StringField'</span>, <span class="string">'URLField'</span>, <span class="string">'EmailField'</span>, <span class="string">'IntField'</span>, <span class="string">'LongField'</span>,</span><br><span class="line"><span class="string">'FloatField'</span>, <span class="string">'DecimalField'</span>, <span class="string">'BooleanField'</span>, <span class="string">'DateTimeField'</span>, <span class="string">'DateField'</span>,</span><br><span class="line"><span class="string">'ComplexDateTimeField'</span>, <span class="string">'EmbeddedDocumentField'</span>, <span class="string">'ObjectIdField'</span>,</span><br><span class="line"><span class="string">'GenericEmbeddedDocumentField'</span>, <span class="string">'DynamicField'</span>, <span class="string">'ListField'</span>,</span><br><span class="line"><span class="string">'SortedListField'</span>, <span class="string">'EmbeddedDocumentListField'</span>, <span class="string">'DictField'</span>,</span><br><span class="line"><span class="string">'MapField'</span>, <span class="string">'ReferenceField'</span>, <span class="string">'CachedReferenceField'</span>,</span><br><span class="line"><span class="string">'LazyReferenceField'</span>, <span class="string">'GenericLazyReferenceField'</span>,</span><br><span class="line"><span class="string">'GenericReferenceField'</span>, <span class="string">'BinaryField'</span>, <span class="string">'GridFSError'</span>, <span class="string">'GridFSProxy'</span>,</span><br><span class="line"><span class="string">'FileField'</span>, <span class="string">'ImageGridFsProxy'</span>, <span class="string">'ImproperlyConfigured'</span>, <span class="string">'ImageField'</span>,</span><br><span class="line"><span class="string">'GeoPointField'</span>, <span class="string">'PointField'</span>, <span class="string">'LineStringField'</span>, <span class="string">'PolygonField'</span>,</span><br><span class="line"><span class="string">'SequenceField'</span>, <span class="string">'UUIDField'</span>, <span class="string">'MultiPointField'</span>, <span class="string">'MultiLineStringField'</span>,</span><br><span class="line"><span class="string">'MultiPolygonField'</span>, <span class="string">'GeoJsonBaseField'</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="2、增删改查-1"><a href="#2、增删改查-1" class="headerlink" title="2、增删改查"></a>2、增删改查</h5><p>models.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> mongoengine</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">StudentModel</span><span class="params">(mongoengine.Document)</span>:</span></span><br><span class="line">    name = mongoengine.StringField(max_length=<span class="number">16</span>)</span><br><span class="line">    age = mongoengine.IntField(default=<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+<p>view.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.shortcuts <span class="keyword">import</span> render, HttpResponse</span><br><span class="line"><span class="keyword">from</span> .models <span class="keyword">import</span> StudentModel</span><br><span class="line"><span class="keyword">from</span> django.views.generic <span class="keyword">import</span> View</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span><span class="params">(request)</span>:</span></span><br><span class="line">    StudentModel.objects.create(name=<span class="string">'小明'</span>, age=<span class="number">8</span>)</span><br><span class="line">    <span class="keyword">return</span> HttpResponse(<span class="string">'创建成功'</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">find</span><span class="params">(request)</span>:</span></span><br><span class="line">    result = StudentModel.objects.filter(name=<span class="string">'小明'</span>)</span><br><span class="line">    print(result[<span class="number">0</span>].name)</span><br><span class="line">    <span class="keyword">return</span> HttpResponse(result[<span class="number">0</span>].name)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">update</span><span class="params">(request)</span>:</span></span><br><span class="line">    result = StudentModel.objects.filter(name=<span class="string">'小明'</span>).first().update(name=<span class="string">'小红'</span>)</span><br><span class="line">    print(result)</span><br><span class="line">    <span class="keyword">return</span> HttpResponse(result)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">delete</span><span class="params">(request)</span>:</span></span><br><span class="line">    result = StudentModel.objects.filter(name=<span class="string">'小红'</span>).first().delete()</span><br><span class="line">    print(result)</span><br><span class="line">    <span class="keyword">return</span> HttpResponse(result)</span><br></pre></td></tr></table></figure>
+
+
+
+
       
     </div>
     <div>
       
-    </div>
+          <div>
     
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://xuqilong.com/2020/01/06/1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="xuqilong">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SNH">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/01/06/1/" itemprop="url">Hello World</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-06T20:42:18+08:00">
-                2020-01-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Kubernetes/" itemprop="url" rel="index">
-                    <span itemprop="name">Kubernetes</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  5.2k
-                </span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
+        <div style="text-align:center;color: #ccc;font-size:14px;">
+              -------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------
         </div>
-      </header>
     
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          ingress的基本使用nginx ingress官网
-kubernetes ingress介绍
-ingress相当于nginx代理服务，在定义 Ingress策略之前，需要先部署Ingress Controller，以实现为所有后端 Service 提供一个统一的入口。
-一、使用官网例子1、创建i
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2020/01/06/1/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    <div>
+</div>
       
     </div>
     
@@ -629,6 +536,35 @@ ingress相当于nginx代理服务，在定义 Ingress策略之前，需要先部
 
     
 
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>Donate comment here</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="xuqilong 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.png" alt="xuqilong 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
     
 
     
@@ -637,12 +573,28 @@ ingress相当于nginx代理服务，在定义 Ingress策略之前，需要先部
       
 
       
+      
+      
 
       
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/01/06/1/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
 
       
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -652,10 +604,11 @@ ingress相当于nginx代理服务，在定义 Ingress策略之前，需要先部
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -663,6 +616,10 @@ ingress相当于nginx代理服务，在定义 Ingress策略之前，需要先部
 
 
           
+
+  
+
+
 
         </div>
         
@@ -683,8 +640,17 @@ ingress相当于nginx代理服务，在定义 Ingress策略之前，需要先部
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -758,6 +724,22 @@ ingress相当于nginx代理服务，在定义 Ingress策略之前，需要先部
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、django中配置MongoDB"><span class="nav-number">1.</span> <span class="nav-text">一、django中配置MongoDB</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1、在Djnago中使用MongoDB数据库时，使用mongoengine模块。"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">1、在Djnago中使用MongoDB数据库时，使用mongoengine模块。</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2、在settings中配置数据库连接如下："><span class="nav-number">1.0.0.2.</span> <span class="nav-text">2、在settings中配置数据库连接如下：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2、在settings中配置数据库连接如下：-1"><span class="nav-number">1.0.0.3.</span> <span class="nav-text">2、在settings中配置数据库连接如下：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3、当需要连接多个MongoDB时：一要在settings中增加数据库连接；二要在models中定义的表中指明使用的数据库。"><span class="nav-number">1.0.0.4.</span> <span class="nav-text">3、当需要连接多个MongoDB时：一要在settings中增加数据库连接；二要在models中定义的表中指明使用的数据库。</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、操作MongoDB"><span class="nav-number">2.</span> <span class="nav-text">二、操作MongoDB</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1、MongoDB支持的数据类型"><span class="nav-number">2.0.0.1.</span> <span class="nav-text">1、MongoDB支持的数据类型</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2、增删改查"><span class="nav-number">2.0.0.2.</span> <span class="nav-text">2、增删改查</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、操作MongoDB-1"><span class="nav-number">3.</span> <span class="nav-text">二、操作MongoDB</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1、MongoDB支持的数据类型-1"><span class="nav-number">3.0.0.1.</span> <span class="nav-text">1、MongoDB支持的数据类型</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2、增删改查-1"><span class="nav-number">3.0.0.2.</span> <span class="nav-text">2、增删改查</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -889,6 +871,10 @@ ingress相当于nginx代理服务，在定义 Ingress策略之前，需要先部
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
