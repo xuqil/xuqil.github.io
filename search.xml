@@ -1,6 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>django-rest-framework:Request</title>
+    <url>/2020/01/14/requst/</url>
+    <content><![CDATA[<p>REST框架的<code>Request</code>类扩展了标准<code>HttpRequest</code>，增加了对REST框架的灵活请求解析和请求身份验证的支持。</p>
+<a id="more"></a>
+
+<h1 id="Requests"><a href="#Requests" class="headerlink" title="Requests"></a><a href="https://www.django-rest-framework.org/api-guide/requests/#requests" target="_blank" rel="noopener">Requests</a></h1><blockquote>
+<p>如果您正在做基于REST的Web服务…则应忽略request.POST。</p>
+<p>— <a href="https://groups.google.com/d/topic/django-developers/dxI4qVzrBY4/discussion" target="_blank" rel="noopener">Django开发人员小组</a> Malcom Tredinnick</p>
+</blockquote>
+<p>REST框架的<code>Request</code>类扩展了标准<code>HttpRequest</code>，增加了对REST框架的灵活请求解析和请求身份验证的支持。</p>
+<hr>
+<h1 id="Request-解析"><a href="#Request-解析" class="headerlink" title="Request 解析"></a><a href="https://www.django-rest-framework.org/api-guide/requests/#request-parsing" target="_blank" rel="noopener">Request 解析</a></h1><p>REST框架的Request对象提供了灵活的请求解析，使您能够以与通常处理表单数据相同的方式来处理JSON数据或其他媒体类型的请求。</p>
+<h2 id="data"><a href="#data" class="headerlink" title=".data"></a><a href="https://www.django-rest-framework.org/api-guide/requests/#data" target="_blank" rel="noopener">.data</a></h2><p><code>request.data</code>返回请求正文的解析内容。这类似于标准<code>request.POST</code>和<code>request.FILES</code>属性，除了：</p>
+<ul>
+<li>它包括所有已解析的内容，包括<em>文件和非文件</em>输入。</li>
+<li>它支持解析除以外的HTTP方法的内容<code>POST</code>，这意味着您可以访问<code>PUT</code>和<code>PATCH</code>请求的内容。</li>
+<li>它支持REST框架的灵活请求解析，而不仅仅是支持表单数据。例如，您可以以处理传入表单数据的相同方式处理传入JSON数据。</li>
+</ul>
+<p>有关更多详细信息，请参见<a href="https://www.django-rest-framework.org/api-guide/parsers/" target="_blank" rel="noopener">解析器文档</a>。</p>
+<h2 id="query-params"><a href="#query-params" class="headerlink" title=".query_params"></a><a href="https://www.django-rest-framework.org/api-guide/requests/#query_params" target="_blank" rel="noopener">.query_params</a></h2><p><code>request.query_params</code>是的更正确命名的同义词<code>request.GET</code>。</p>
+<p>为了使代码内部更清晰，我们建议使用<code>request.query_params</code>，而不是Django的standard <code>request.GET</code>。这样做将有助于使您的代码库更加正确和明显-任何HTTP方法类型都可以包括查询参数，而不仅仅是<code>GET</code>请求。</p>
+<h2 id="parsers"><a href="#parsers" class="headerlink" title=".parsers"></a><a href="https://www.django-rest-framework.org/api-guide/requests/#parsers" target="_blank" rel="noopener">.parsers</a></h2><p>在<code>APIView</code>类或<code>@api_view</code>装饰将确保这个属性被自动设置为列表<code>Parser</code>实例的基础上，<code>parser_classes</code>对视图设置或基于该<code>DEFAULT_PARSER_CLASSES</code>设置。</p>
+<p>您通常不需要访问此属性。</p>
+<hr>
+<p><strong>注意：</strong>如果客户端发送格式错误的内容，则访问<code>request.data</code>可能会引发<code>ParseError</code>。默认情况下，REST框架的<code>APIView</code>类或<code>@api_view</code>装饰器将捕获错误并返回<code>400 Bad Request</code>响应。</p>
+<p>如果客户端发送的请求的内容类型无法解析，则将<code>UnsupportedMediaType</code>引发异常，默认情况下将捕获该异常并返回<code>415 Unsupported Media Type</code>响应。</p>
+<hr>
+<h1 id="内容协商"><a href="#内容协商" class="headerlink" title="内容协商"></a><a href="https://www.django-rest-framework.org/api-guide/requests/#content-negotiation" target="_blank" rel="noopener">内容协商</a></h1><p>该请求公开了一些属性，使您可以确定内容协商阶段的结果。这使您可以实现一些行为，例如为不同的媒体类型选择不同的序列化方案。</p>
+<h2 id="accepted-renderer"><a href="#accepted-renderer" class="headerlink" title=".accepted_renderer"></a><a href="https://www.django-rest-framework.org/api-guide/requests/#accepted_renderer" target="_blank" rel="noopener">.accepted_renderer</a></h2><p>内容协商阶段选择的渲染器实例。</p>
+<h2 id="accepted-media-type"><a href="#accepted-media-type" class="headerlink" title=".accepted_media_type"></a><a href="https://www.django-rest-framework.org/api-guide/requests/#accepted_media_type" target="_blank" rel="noopener">.accepted_media_type</a></h2><p>一个字符串，表示内容协商阶段接受的媒体类型。</p>
+<hr>
+<h1 id="认证方式"><a href="#认证方式" class="headerlink" title="认证方式"></a><a href="https://www.django-rest-framework.org/api-guide/requests/#authentication" target="_blank" rel="noopener">认证方式</a></h1><p>REST框架提供了灵活的按请求身份验证，使您能够：</p>
+<ul>
+<li>对API的不同部分使用不同的身份验证策略。</li>
+<li>支持使用多种身份验证策略。</li>
+<li>提供与传入请求关联的用户和令牌信息。</li>
+</ul>
+<h2 id="user"><a href="#user" class="headerlink" title=".user"></a><a href="https://www.django-rest-framework.org/api-guide/requests/#user" target="_blank" rel="noopener">.user</a></h2><p><code>request.user</code>通常会返回的实例<code>django.contrib.auth.models.User</code>，尽管其行为取决于所使用的身份验证策略。</p>
+<p>如果请求未经身份验证，则默认值为<code>request.user</code>的实例<code>django.contrib.auth.models.AnonymousUser</code>。</p>
+<p>有关更多详细信息，请参见<a href="https://www.django-rest-framework.org/api-guide/authentication/" target="_blank" rel="noopener">身份验证文档</a>。</p>
+<h2 id="auth"><a href="#auth" class="headerlink" title=".auth"></a><a href="https://www.django-rest-framework.org/api-guide/requests/#auth" target="_blank" rel="noopener">.auth</a></h2><p><code>request.auth</code>返回任何其他身份验证上下文。的确切行为<code>request.auth</code>取决于所使用的身份验证策略，但通常可能是身份验证请求所依据的令牌的实例。</p>
+<p>如果该请求是未认证的，或者如果没有附加上下文存在时，默认值<code>request.auth</code>是<code>None</code>。</p>
+<p>有关更多详细信息，请参见<a href="https://www.django-rest-framework.org/api-guide/authentication/" target="_blank" rel="noopener">身份验证文档</a>。</p>
+<h2 id="authenticators"><a href="#authenticators" class="headerlink" title=".authenticators"></a><a href="https://www.django-rest-framework.org/api-guide/requests/#authenticators" target="_blank" rel="noopener">.authenticators</a></h2><p>在<code>APIView</code>类或<code>@api_view</code>装饰将确保这个属性被自动设置为列表<code>Authentication</code>实例的基础上，<code>authentication_classes</code>对视图设置或基于该<code>DEFAULT_AUTHENTICATORS</code>设置。</p>
+<p>您通常不需要访问此属性。</p>
+<hr>
+<p><strong>注意：</strong><code>WrappedAttributeError</code>调用<code>.user</code>或<code>.auth</code>属性时，您可能会看到一个凸起。这些错误源自作为标准的身份验证器<code>AttributeError</code>，但是有必要将它们重新引发为其他异常类型，以防止外部属性访问抑制它们。Python不会识别出<code>AttributeError</code>源于身份验证器，而是会假设请求对象没有<code>.user</code>或<code>.auth</code>属性。身份验证器将需要固定。</p>
+<hr>
+<h1 id="浏览器增强"><a href="#浏览器增强" class="headerlink" title="浏览器增强"></a><a href="https://www.django-rest-framework.org/api-guide/requests/#browser-enhancements" target="_blank" rel="noopener">浏览器增强</a></h1><p>REST框架支持的几个浏览器增强功能，例如基于浏览器的<code>PUT</code>，<code>PATCH</code>和<code>DELETE</code>形式。</p>
+<h2 id="method"><a href="#method" class="headerlink" title=".method"></a><a href="https://www.django-rest-framework.org/api-guide/requests/#method" target="_blank" rel="noopener">.method</a></h2><p><code>request.method</code>返回请求的HTTP方法的<strong>大写</strong>字符串表示形式。</p>
+<p>基于浏览器的<code>PUT</code>，<code>PATCH</code>而<code>DELETE</code>形式是透明的支持。</p>
+<p>有关更多信息，请参阅<a href="https://www.django-rest-framework.org/topics/browser-enhancements/" target="_blank" rel="noopener">浏览器增强功能文档</a>。</p>
+<h2 id="content-type"><a href="#content-type" class="headerlink" title=".content_type"></a><a href="https://www.django-rest-framework.org/api-guide/requests/#content_type" target="_blank" rel="noopener">.content_type</a></h2><p><code>request.content_type</code>，返回代表HTTP请求主体的媒体类型的字符串对象，如果未提供媒体类型，则返回空字符串。</p>
+<p>通常，您通常不需要直接访问请求的内容类型，因为您通常将依赖于REST框架的默认请求解析行为。</p>
+<p>如果确实需要访问请求的内容类型，则应<code>.content_type</code>优先使用属性而不是using <code>request.META.get(&#39;HTTP_CONTENT_TYPE&#39;)</code>，因为它为基于浏览器的非格式内容提供了透明的支持。</p>
+<p>有关更多信息，请参阅<a href="https://www.django-rest-framework.org/topics/browser-enhancements/" target="_blank" rel="noopener">浏览器增强功能文档</a>。</p>
+<h2 id="stream"><a href="#stream" class="headerlink" title=".stream"></a><a href="https://www.django-rest-framework.org/api-guide/requests/#stream" target="_blank" rel="noopener">.stream</a></h2><p><code>request.stream</code> 返回表示请求正文内容的流。</p>
+<p>通常，您通常不需要直接访问请求的内容，因为您通常会依赖REST框架的默认请求解析行为。</p>
+<hr>
+<h1 id="标准HttpRequest属性"><a href="#标准HttpRequest属性" class="headerlink" title="标准HttpRequest属性"></a><a href="https://www.django-rest-framework.org/api-guide/requests/#standard-httprequest-attributes" target="_blank" rel="noopener">标准HttpRequest属性</a></h1><p>随着REST框架对<code>Request</code>Django 的扩展<code>HttpRequest</code>，所有其他标准属性和方法也都可用。例如<code>request.META</code>和<code>request.session</code>字典可以正常使用。</p>
+<p>请注意，由于实现原因，<code>Request</code>该类不继承自<code>HttpRequest</code>类，而是使用composition扩展了该类。</p>
+]]></content>
+      <categories>
+        <category>django</category>
+        <category>django-rest-framework</category>
+      </categories>
+      <tags>
+        <tag>django-rest-framework</tag>
+        <tag>django</tag>
+        <tag>restful</tag>
+        <tag>request</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>list</title>
     <url>/2020/01/14/1/</url>
     <content><![CDATA[]]></content>
@@ -97,7 +171,7 @@ connect(&#39;name2&#39;, host=&#39;127.0.0.1&#39;, port=27017， alias=&#39;data
 ]]></content>
   </entry>
   <entry>
-    <title>Hello World</title>
+    <title>Ingress的使用</title>
     <url>/2020/01/06/1/</url>
     <content><![CDATA[<h1 id="ingress的基本使用"><a href="#ingress的基本使用" class="headerlink" title="ingress的基本使用"></a>ingress的基本使用</h1><p><a href="https://kubernetes.github.io/ingress-nginx/deploy/#bare-metal" target="_blank" rel="noopener">nginx ingress官网</a></p>
 <p><a href="https://kubernetes.io/docs/concepts/services-networking/ingress/" target="_blank" rel="noopener">kubernetes ingress介绍</a></p>
