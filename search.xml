@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>django-rest-framework:Request</title>
-    <url>/2020/01/14/requst/</url>
+    <url>/2020-01-14-requst.html</url>
     <content><![CDATA[<p>REST框架的<code>Request</code>类扩展了标准<code>HttpRequest</code>，增加了对REST框架的灵活请求解析和请求身份验证的支持。</p>
 <a id="more"></a>
 
@@ -76,12 +76,12 @@
   </entry>
   <entry>
     <title>list</title>
-    <url>/2020/01/14/1/</url>
+    <url>/2020-01-14-1.html</url>
     <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title>你好</title>
-    <url>/2020/01/06/heoo/</url>
+    <url>/2020-01-06-heoo.html</url>
     <content><![CDATA[<h2 id="一、django中配置MongoDB"><a href="#一、django中配置MongoDB" class="headerlink" title="一、django中配置MongoDB"></a>一、django中配置MongoDB</h2><h5 id="1、在Djnago中使用MongoDB数据库时，使用mongoengine模块。"><a href="#1、在Djnago中使用MongoDB数据库时，使用mongoengine模块。" class="headerlink" title="1、在Djnago中使用MongoDB数据库时，使用mongoengine模块。"></a>1、在Djnago中使用MongoDB数据库时，使用mongoengine模块。</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">pip install  mongoengine</span><br></pre></td></tr></table></figure>
 
 <h5 id="2、在settings中配置数据库连接如下："><a href="#2、在settings中配置数据库连接如下：" class="headerlink" title="2、在settings中配置数据库连接如下："></a>2、在settings中配置数据库连接如下：</h5><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">## 一、django中配置MongoDB</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">##### 1、在Djnago中使用MongoDB数据库时，使用mongoengine模块。</span></span><br><span class="line"></span><br><span class="line">​</span><br></pre></td></tr></table></figure>
@@ -172,7 +172,7 @@ connect(&#39;name2&#39;, host=&#39;127.0.0.1&#39;, port=27017， alias=&#39;data
   </entry>
   <entry>
     <title>Ingress的使用</title>
-    <url>/2020/01/06/1/</url>
+    <url>/2020-01-06-1.html</url>
     <content><![CDATA[<h1 id="ingress的基本使用"><a href="#ingress的基本使用" class="headerlink" title="ingress的基本使用"></a>ingress的基本使用</h1><p><a href="https://kubernetes.github.io/ingress-nginx/deploy/#bare-metal" target="_blank" rel="noopener">nginx ingress官网</a></p>
 <p><a href="https://kubernetes.io/docs/concepts/services-networking/ingress/" target="_blank" rel="noopener">kubernetes ingress介绍</a></p>
 <p><code>ingress</code>相当于<code>nginx</code>代理服务，在定义 <code>Ingress</code>策略之前，需要先部署<code>Ingress Controller</code>，以实现为所有后端 <code>Service</code> 提供一个统一的入口。</p>
