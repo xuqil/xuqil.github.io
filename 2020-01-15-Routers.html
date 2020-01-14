@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  <title>django-rest-framework:Routers | SNH</title>
+  
+  
+  <meta name="description" content="SNHGB">
+  
+
+  
+
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <!-- meta -->
+  
+  
+  <meta name='theme-color' content='#FFFFFF'>
+  <meta name='msapplication-TileColor' content='#1BC3FB'>
+  <meta name='msapplication-config' content='https://cdn.jsdelivr.net/gh/xaoxuu/assets@master/favicon/favicons/browserconfig.xml'>
+  
+
+  <!-- link -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.10.1/css/all.min.css">
+  
+  
+  <link rel='shortcut icon' type='image/x-icon' href='https://cdn.jsdelivr.net/gh/xaoxuu/assets@master/favicon/favicon.ico'>
+  <link rel='icon' type='image/x-icon' sizes='32x32' href='https://cdn.jsdelivr.net/gh/xaoxuu/assets@master/favicon/favicons/favicon-32x32.png'>
+  <link rel='apple-touch-icon' type='image/png' sizes='180x180' href='https://cdn.jsdelivr.net/gh/xaoxuu/assets@master/favicon/favicons/apple-touch-icon.png'>
+  <link rel='mask-icon' color='#1BC3FB' href='https://cdn.jsdelivr.net/gh/xaoxuu/assets@master/favicon/favicons/safari-pinned-tab.svg'>
+  <link rel='manifest' href='https://cdn.jsdelivr.net/gh/xaoxuu/assets@master/favicon/favicons/site.webmanifest'>
+  
+
+  
+
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.11.26/css/style.css">
+
+  
+
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+
+  
+  
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  
+  
+  <div class="cover-wrapper">
+    <cover class='cover post half'>
+      
+        
+  <h1 class='title'>SNHGB</h1>
+
+
+  <div class="m_search">
+    <form name="searchform" class="form u-search-form">
+      <input type="text" class="input u-search-input" placeholder="" />
+      <i class="icon fas fa-search fa-fw"></i>
+    </form>
+  </div>
+
+<div class='menu navgation'>
+  <ul class='h-list'>
+    
+      
+        <li>
+          <a class="nav home" href="/"
+            
+            
+            id="home">
+            <i class='fas fa-rss fa-fw'></i>&nbsp;博文
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/projects/"
+            
+            
+            id="projects">
+            <i class='fas fa-code-branch fa-fw'></i>&nbsp;项目
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/friends/"
+            
+              rel="nofollow"
+            
+            
+            id="friends">
+            <i class='fas fa-link fa-fw'></i>&nbsp;友链
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/about/"
+            
+              rel="nofollow"
+            
+            
+            id="about">
+            <i class='fas fa-info-circle fa-fw'></i>&nbsp;关于
+          </a>
+        </li>
+      
+    
+  </ul>
+</div>
+
+      
+    </cover>
+    <header class="l_header pure">
+  <div id="loading-bar-wrapper">
+    <div id="loading-bar" class="pure"></div>
+  </div>
+
+	<div class='wrapper'>
+		<div class="nav-main container container--flex">
+      <a class="logo flat-box" href='/' >
+        
+          SNH
+        
+      </a>
+			<div class='menu navgation'>
+				<ul class='h-list'>
+          
+  					
+  						<li>
+								<a class="nav flat-box" href="/"
+                  
+                  
+                  id="home">
+									<i class='fas fa-grin fa-fw'></i>&nbsp;首页
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/categories/"
+                  
+                    rel="nofollow"
+                  
+                  
+                  id="categories">
+									<i class='fas fa-folder-open fa-fw'></i>&nbsp;分类
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/tags/"
+                  
+                    rel="nofollow"
+                  
+                  
+                  id="tags">
+									<i class='fas fa-hashtag fa-fw'></i>&nbsp;标签
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/archives/"
+                  
+                    rel="nofollow"
+                  
+                  
+                  id="archives">
+									<i class='fas fa-archive fa-fw'></i>&nbsp;归档
+								</a>
+							</li>
+      			
+      		
+				</ul>
+			</div>
+
+			
+				<div class="m_search">
+					<form name="searchform" class="form u-search-form">
+						<input type="text" class="input u-search-input" placeholder="搜索" />
+						<i class="icon fas fa-search fa-fw"></i>
+					</form>
+				</div>
+			
+			<ul class='switcher h-list'>
+				
+					<li class='s-search'><a class="fas fa-search fa-fw" href='javascript:void(0)'></a></li>
+				
+				<li class='s-menu'><a class="fas fa-bars fa-fw" href='javascript:void(0)'></a></li>
+			</ul>
+		</div>
+
+		<div class='nav-sub container container--flex'>
+			<a class="logo flat-box"></a>
+			<ul class='switcher h-list'>
+				<li class='s-comment'><a class="flat-btn fas fa-comments fa-fw" href='javascript:void(0)'></a></li>
+        
+          <li class='s-toc'><a class="flat-btn fas fa-list fa-fw" href='javascript:void(0)'></a></li>
+        
+			</ul>
+		</div>
+	</div>
+</header>
+	<aside class="menu-phone">
+    <header>
+		<nav class="menu navgation">
+      <ul>
+        
+          
+            <li>
+							<a class="nav flat-box" href="/"
+                
+                
+                id="home">
+								<i class='fas fa-clock fa-fw'></i>&nbsp;近期文章
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/archives/"
+                
+                  rel="nofollow"
+                
+                
+                id="archives">
+								<i class='fas fa-archive fa-fw'></i>&nbsp;文章归档
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/projects/"
+                
+                
+                id="projects">
+								<i class='fas fa-code-branch fa-fw'></i>&nbsp;开源项目
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/friends/"
+                
+                  rel="nofollow"
+                
+                
+                id="friends">
+								<i class='fas fa-link fa-fw'></i>&nbsp;我的友链
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/about/"
+                
+                  rel="nofollow"
+                
+                
+                id="about">
+								<i class='fas fa-info-circle fa-fw'></i>&nbsp;关于小站
+							</a>
+            </li>
+          
+       
+      </ul>
+		</nav>
+    </header>
+	</aside>
+<script>setLoadingBarProgress(40);</script>
+
+  </div>
+
+
+  <div class="l_body">
+    <div class='body-wrapper'>
+      <div class='l_main'>
+  
+
+  <article id="post" class="post white-box article-type-post" itemscope itemprop="blogPost">
+    
+
+
+  <section class='meta'>
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  
+    <h1 class="title">
+      <a href="/2020-01-15-Routers.html">
+        django-rest-framework:Routers
+      </a>
+    </h1>
+  
+
+
+      
+      <div class='new-meta-box'>
+        
+          
+        
+          
+            
+  <div class='new-meta-item author'>
+    
+      <a href="http://xuqilong.com" rel="nofollow">
+        
+          <i class="fas fa-user" aria-hidden="true"></i>
+        
+        <p>xuqilong</p>
+      </a>
+    
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2020-01-15</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/django/django-rest-framework/' rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>django&nbsp;/&nbsp;django-rest-framework</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+  
+    <div class="new-meta-item browse busuanzi">
+      <a class='notlink'>
+        <i class="fas fa-eye" aria-hidden="true"></i>
+        <p>
+          <span id="busuanzi_value_page_pv">
+            <i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i>
+          </span>
+        </p>
+      </a>
+    </div>
+  
+
+
+          
+        
+          
+            
+  
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+    <section class="article typo">
+      <div class="article-entry" itemprop="articleBody">
+        <p>资源路由允许您快速声明给定资源控制器的所有通用路由。无需为索引声明单独的路由，而是在单行代码中声明资源丰富的路由。</p>
+<a id="more"></a>
+
+<h1 id="Routers"><a href="#Routers" class="headerlink" title="Routers"></a><a href="https://www.django-rest-framework.org/api-guide/routers/#routers" target="_blank" rel="noopener">Routers</a></h1><blockquote>
+<p>资源路由允许您快速声明给定资源控制器的所有通用路由。无需为索引声明单独的路由，而是在单行代码中声明资源丰富的路由。</p>
+<p>— <a href="https://guides.rubyonrails.org/routing.html" target="_blank" rel="noopener">Ruby on Rails文档</a></p>
+</blockquote>
+<p>一些Web框架（例如Rails）提供了自动确定应用程序的URL应如何映射到处理传入请求的逻辑的功能。</p>
+<p>REST框架增加了对将自动URL路由到Django的支持，并为您提供了一种简单，快速且一致的方式将视图逻辑连接到一组URL。</p>
+<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a><a href="https://www.django-rest-framework.org/api-guide/routers/#usage" target="_blank" rel="noopener">用法</a></h2><p>这是一个使用的简单URL conf的示例<code>SimpleRouter</code>。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> rest_framework <span class="keyword">import</span> routers</span><br><span class="line"></span><br><span class="line">router = routers.SimpleRouter()</span><br><span class="line">router.register(<span class="string">r'users'</span>, UserViewSet)</span><br><span class="line">router.register(<span class="string">r'accounts'</span>, AccountViewSet)</span><br><span class="line">urlpatterns = router.urls</span><br></pre></td></tr></table></figure>
+
+<p>该方法有两个强制性参数<code>register()</code>：</p>
+<ul>
+<li><code>prefix</code> -用于这组路由的URL前缀。</li>
+<li><code>viewset</code> -视图集类。</li>
+</ul>
+<p>（可选）您还可以指定其他参数：</p>
+<ul>
+<li><code>basename</code>-用于创建的URL名称的基础。如果未设置，则基名称将基于<code>queryset</code>视图集的属性自动生成（如果有）。请注意，如果视图集不包含<code>queryset</code>属性，则必须<code>basename</code>在注册视图集时进行设置。</li>
+</ul>
+<p>上面的示例将生成以下URL模式：</p>
+<ul>
+<li>网址格式：<code>^users/$</code> 名称：<code>&#39;user-list&#39;</code></li>
+<li>网址格式：<code>^users/{pk}/$</code> 名称：<code>&#39;user-detail&#39;</code></li>
+<li>网址格式：<code>^accounts/$</code> 名称：<code>&#39;account-list&#39;</code></li>
+<li>网址格式：<code>^accounts/{pk}/$</code> 名称：<code>&#39;account-detail&#39;</code></li>
+</ul>
+<hr>
+<p><strong>注意</strong>：该<code>basename</code>参数用于指定视图名称模式的初始部分。在上面的示例中，这就是“ <code>user</code>或” <code>account</code>部分。</p>
+<p>通常，您<em>不需要</em>指定<code>basename</code>参数，但是如果您有一个定义了自定义<code>get_queryset</code>方法的视图<code>.queryset</code>集，则该视图集可能没有属性集。如果尝试注册该视图集，则会看到类似以下错误：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'basename'</span> argument <span class="keyword">not</span> specified, <span class="keyword">and</span> could <span class="keyword">not</span> automatically determine the name <span class="keyword">from</span> the viewset, <span class="keyword">as</span> it does <span class="keyword">not</span> have a <span class="string">'.queryset'</span> attribute.</span><br></pre></td></tr></table></figure>
+
+<p>这意味着<code>basename</code>注册视图集时需要显式设置参数，因为无法从模型名称自动确定该参数。</p>
+<hr>
+<h3 id="include与路由器一起使用"><a href="#include与路由器一起使用" class="headerlink" title="include与路由器一起使用"></a><a href="https://www.django-rest-framework.org/api-guide/routers/#using-include-with-routers" target="_blank" rel="noopener"><code>include</code>与路由器一起使用</a></h3><p><code>.urls</code>路由器实例上的属性只是URL模式的标准列表。关于如何包含这些URL，有很多不同的样式。</p>
+<p>例如，您可以追加<code>router.urls</code>到现有视图的列表中…</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">router = routers.SimpleRouter()</span><br><span class="line">router.register(<span class="string">r'users'</span>, UserViewSet)</span><br><span class="line">router.register(<span class="string">r'accounts'</span>, AccountViewSet)</span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    url(<span class="string">r'^forgot-password/$'</span>, ForgotPasswordFormView.as_view()),</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">urlpatterns += router.urls</span><br></pre></td></tr></table></figure>
+
+<p>另外，您也可以使用Django的<code>include</code>功能，例如…</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">urlpatterns = [</span><br><span class="line">    url(<span class="string">r'^forgot-password/$'</span>, ForgotPasswordFormView.as_view()),</span><br><span class="line">    url(<span class="string">r'^'</span>, include(router.urls)),</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p>您可以使用<code>include</code>应用程序名称空间：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">urlpatterns = [</span><br><span class="line">    url(<span class="string">r'^forgot-password/$'</span>, ForgotPasswordFormView.as_view()),</span><br><span class="line">    url(<span class="string">r'^api/'</span>, include((router.urls, <span class="string">'app_name'</span>))),</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p>或应用程序和实例名称空间：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">urlpatterns = [</span><br><span class="line">    url(<span class="string">r'^forgot-password/$'</span>, ForgotPasswordFormView.as_view()),</span><br><span class="line">    url(<span class="string">r'^api/'</span>, include((router.urls, <span class="string">'app_name'</span>), namespace=<span class="string">'instance_name'</span>)),</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p>有关更多详细信息，请参见Django的<a href="https://docs.djangoproject.com/en/3.0/topics/http/urls/" target="_blank" rel="noopener">URL名称空间文档</a>和<a href="https://docs.djangoproject.com/en/2.0/ref/urls/#include" target="_blank" rel="noopener"><code>include</code>API参考</a>。</p>
+<hr>
+<p><strong>注意</strong>：如果将命名空间与超链接的序列化程序一起使用，则还需要确保<code>view_name</code>序列化程序上的所有参数都能正确反映名称空间。在上面的示例中，您需要包括一个参数，例如<code>view_name=&#39;app_name:user-detail&#39;</code>超链接到用户详细信息视图的序列化程序字段的参数 。</p>
+<p>自动<code>view_name</code>生成使用的模式<code>%(model_name)-detail</code>。除非您的模型名称实际发生冲突，否则在使用超链接序列化程序时最好<strong>不要为</strong> Django REST Framework视图命名。</p>
+<hr>
+<h3 id="额外操作的路由"><a href="#额外操作的路由" class="headerlink" title="额外操作的路由"></a><a href="https://www.django-rest-framework.org/api-guide/routers/#routing-for-extra-actions" target="_blank" rel="noopener">额外操作的路由</a></h3><p>视图集可以通过用装饰器装饰方法来<a href="https://www.django-rest-framework.org/api-guide/viewsets/#marking-extra-actions-for-routing" target="_blank" rel="noopener">标记用于路由</a>的<a href="https://www.django-rest-framework.org/api-guide/viewsets/#marking-extra-actions-for-routing" target="_blank" rel="noopener">额外操作</a><code>@action</code>。这些额外的动作将包含在生成的路线中。例如，给定类的<code>set_password</code>方法<code>UserViewSet</code>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> myapp.permissions <span class="keyword">import</span> IsAdminOrIsSelf</span><br><span class="line"><span class="keyword">from</span> rest_framework.decorators <span class="keyword">import</span> action</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UserViewSet</span><span class="params">(ModelViewSet)</span>:</span></span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line"><span class="meta">    @action(methods=['post'], detail=True, permission_classes=[IsAdminOrIsSelf])</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">set_password</span><span class="params">(self, request, pk=None)</span>:</span></span><br><span class="line">        ...</span><br></pre></td></tr></table></figure>
+
+<p>将生成以下路线：</p>
+<ul>
+<li>网址格式： <code>^users/{pk}/set_password/$</code></li>
+<li>网址名称： <code>&#39;user-set-password&#39;</code></li>
+</ul>
+<p>默认情况下，URL模式基于方法命名，URL名称是<code>ViewSet.basename</code>和连字符方法名的组合。如果您不想对这些值中的任何一个使用默认值，您可以改为向<code>@action</code> 装饰器提供<code>url_path</code>和 <code>url_name</code>参数。</p>
+<p>例如，如果要将我们的自定义操作的URL更改为<code>^users/{pk}/change-password/$</code>，则可以编写：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> myapp.permissions <span class="keyword">import</span> IsAdminOrIsSelf</span><br><span class="line"><span class="keyword">from</span> rest_framework.decorators <span class="keyword">import</span> action</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UserViewSet</span><span class="params">(ModelViewSet)</span>:</span></span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line"><span class="meta">    @action(methods=['post'], detail=True, permission_classes=[IsAdminOrIsSelf],</span></span><br><span class="line">            url_path=<span class="string">'change-password'</span>, url_name=<span class="string">'change_password'</span>)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">set_password</span><span class="params">(self, request, pk=None)</span>:</span></span><br><span class="line">        ...</span><br></pre></td></tr></table></figure>
+
+<p>上面的示例现在将生成以下URL模式：</p>
+<ul>
+<li>网址路径： <code>^users/{pk}/change-password/$</code></li>
+<li>网址名称： <code>&#39;user-change_password&#39;</code></li>
+</ul>
+<h1 id="API指南"><a href="#API指南" class="headerlink" title="API指南"></a><a href="https://www.django-rest-framework.org/api-guide/routers/#api-guide" target="_blank" rel="noopener">API指南</a></h1><h2 id="SimpleRouter"><a href="#SimpleRouter" class="headerlink" title="SimpleRouter"></a><a href="https://www.django-rest-framework.org/api-guide/routers/#simplerouter" target="_blank" rel="noopener">SimpleRouter</a></h2><p>该路由器包括一套标准的途径<code>list</code>，<code>create</code>，<code>retrieve</code>，<code>update</code>，<code>partial_update</code>和<code>destroy</code>行动。视图集还可以使用<code>@action</code>装饰器标记路由的其他方法。</p>
+<table>
+<thead>
+<tr>
+<th>URL Style</th>
+<th>HTTP Method</th>
+<th>Action</th>
+<th>URL Name</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>{prefix}/</td>
+<td>GET</td>
+<td>list</td>
+<td>{basename}-list</td>
+</tr>
+<tr>
+<td>POST</td>
+<td>create</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>{prefix}/{url_path}/</td>
+<td>GET, 或由<code>methods</code>参数指定</td>
+<td><code>@action(detail=False)</code> decorated method</td>
+<td>{basename}-{url_name}</td>
+</tr>
+<tr>
+<td>{prefix}/{lookup}/</td>
+<td>GET</td>
+<td>retrieve</td>
+<td>{basename}-detail</td>
+</tr>
+<tr>
+<td>PUT</td>
+<td>update</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>PATCH</td>
+<td>partial_update</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td>destroy</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>{prefix}/{lookup}/{url_path}/</td>
+<td>GET, 或由<code>methods</code>参数指定</td>
+<td><code>@action(detail=True)</code> decorated method</td>
+<td>{basename}-{url_name}</td>
+</tr>
+</tbody></table>
+<p>默认情况下，<code>SimpleRoute</code>r创建的url会附加一个斜杠。在实例化路由器时，可以通过将尾部的斜杠参数设置为<code>False</code>来修改此行为。例如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">router = SimpleRouter(trailing_slash=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
+
+<p>尾部的斜杠在Django中是常规的，但在其他一些框架（例如Rails）中默认不使用。尽管有些JavaScript框架可能期望使用特定的路由样式，但是选择使用哪种样式在很大程度上取决于首选项。</p>
+<p>路由器将匹配包含除斜杠和句点字符以外的任何字符的查找值。对于更严格（或更宽松）的查找模式，请<code>lookup_value_regex</code>在视图集上设置属性。例如，您可以将查找限制为有效的UUID：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyModelViewSet</span><span class="params">(mixins.RetrieveModelMixin, viewsets.GenericViewSet)</span>:</span></span><br><span class="line">    lookup_field = <span class="string">'my_model_id'</span></span><br><span class="line">    lookup_value_regex = <span class="string">'[0-9a-f]&#123;32&#125;'</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="DefaultRouter"><a href="#DefaultRouter" class="headerlink" title="DefaultRouter"></a><a href="https://www.django-rest-framework.org/api-guide/routers/#defaultrouter" target="_blank" rel="noopener">DefaultRouter</a></h2><p>该路由器与<code>SimpleRouter</code>上面类似，但是还包括一个默认的API根视图，该根视图返回一个响应，其中包含指向所有列表视图的超链接。它还为可选<code>.json</code>样式格式后缀生成路由。</p>
+<table>
+<thead>
+<tr>
+<th>URL Style</th>
+<th>HTTP Method</th>
+<th>Action</th>
+<th>URL Name</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>[.format]</td>
+<td>GET</td>
+<td>自动生成的根视图</td>
+<td>api-root</td>
+</tr>
+<tr>
+<td>{prefix}/[.format]</td>
+<td>GET</td>
+<td>list</td>
+<td>{basename}-list</td>
+</tr>
+<tr>
+<td>POST</td>
+<td>create</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>{prefix}/{url_path}/[.format]</td>
+<td>GET, 或由“methods”参数指定</td>
+<td><code>@action(detail=False)</code> decorated method</td>
+<td>{basename}-{url_name}</td>
+</tr>
+<tr>
+<td>{prefix}/{lookup}/[.format]</td>
+<td>GET</td>
+<td>retrieve</td>
+<td>{basename}-detail</td>
+</tr>
+<tr>
+<td>PUT</td>
+<td>update</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>PATCH</td>
+<td>partial_update</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td>destroy</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>{prefix}/{lookup}/{url_path}/[.format]</td>
+<td>GET, 或由“methods”参数指定</td>
+<td><code>@action(detail=True)</code> decorated method</td>
+<td>{basename}-{url_name}</td>
+</tr>
+</tbody></table>
+<p>与<code>SimpleRouter</code>一样，在实例化路由器时，可以通过将<code>trailing_slash</code>参数设置为<code>False</code>来删除URL路由上的尾部斜杠。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">router = DefaultRouter(trailing_slash=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
+
+<h1 id="自定义路由器"><a href="#自定义路由器" class="headerlink" title="自定义路由器"></a><a href="https://www.django-rest-framework.org/api-guide/routers/#custom-routers" target="_blank" rel="noopener">自定义路由器</a></h1><p>实施定制路由器并不是您经常需要做的事情，但是如果您对API的URL的结构有特定要求，这将很有用。这样做可以使您以可重用的方式封装URL结构，从而确保您不必为每个新视图明确编写URL模式。</p>
+<p>实现自定义路由器的最简单方法是将现有路由器类之一作为子类。该<code>.routes</code>属性用于模板化将映射到每个视图集的URL模式。该<code>.routes</code>属性是<code>Route</code>命名元组的列表。</p>
+<p><code>Route</code>命名元组的参数为：</p>
+<p><strong>url</strong>：一个字符串，代表要路由的URL。可能包含以下格式字符串：</p>
+<ul>
+<li><code>{prefix}</code> -用于这组路由的URL前缀。</li>
+<li><code>{lookup}</code> -用于与单个实例匹配的查找字段。</li>
+<li><code>{trailing_slash}</code>-根据<code>trailing_slash</code>参数，是’/‘还是空字符串。</li>
+</ul>
+<p><strong>mapping</strong>：HTTP方法名称到视图方法的映射</p>
+<p><strong>name</strong>：<code>reverse</code>呼叫中使用的URL名称。可能包含以下格式字符串：</p>
+<ul>
+<li><code>{basename}</code> -用于创建的URL名称的基础。</li>
+</ul>
+<p><strong>initkwargs</strong>：实例化视图时应传递的所有其他参数的字典。请注意，<code>detail</code>，<code>basename</code>，和<code>suffix</code>参数保留给视图集中内省和也使用可浏览的API生成视图名称和面包屑链接。</p>
+<h2 id="自定义动态路线"><a href="#自定义动态路线" class="headerlink" title="自定义动态路线"></a><a href="https://www.django-rest-framework.org/api-guide/routers/#customizing-dynamic-routes" target="_blank" rel="noopener">自定义动态路线</a></h2><p>您还可以自定义<code>@action</code>装饰器的路由方式。<code>DynamicRoute</code>在<code>.routes</code>列表中包括命名的元组，将<code>detail</code>参数设置为适用于基于列表的路由和基于详细信息的路由。除了<code>detail</code>，参数为<code>DynamicRoute</code>：</p>
+<p><strong>url</strong>：一个字符串，代表要路由的URL。可能包含与相同的格式字符串<code>Route</code>，并且另外接受<code>{url_path}</code>格式字符串。</p>
+<p><strong>name</strong>：<code>reverse</code>呼叫中使用的URL名称。可能包含以下格式字符串：</p>
+<ul>
+<li><code>{basename}</code> -用于创建的URL名称的基础。</li>
+<li><code>{url_name}</code>- <code>url_name</code>提供给<code>@action</code>。</li>
+</ul>
+<p><strong>initkwargs</strong>：实例化视图时应传递的所有其他参数的字典。</p>
+<h2 id="例"><a href="#例" class="headerlink" title="例"></a><a href="https://www.django-rest-framework.org/api-guide/routers/#example" target="_blank" rel="noopener">例</a></h2><p>以下示例将仅路由到<code>list</code>和<code>retrieve</code>操作，并且不使用尾部斜杠约定。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> rest_framework.routers <span class="keyword">import</span> Route, DynamicRoute, SimpleRouter</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CustomReadOnlyRouter</span><span class="params">(SimpleRouter)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    A router for read-only APIs, which doesn't use trailing slashes.</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    routes = [</span><br><span class="line">        Route(</span><br><span class="line">            url=<span class="string">r'^&#123;prefix&#125;$'</span>,</span><br><span class="line">            mapping=&#123;<span class="string">'get'</span>: <span class="string">'list'</span>&#125;,</span><br><span class="line">            name=<span class="string">'&#123;basename&#125;-list'</span>,</span><br><span class="line">            detail=<span class="literal">False</span>,</span><br><span class="line">            initkwargs=&#123;<span class="string">'suffix'</span>: <span class="string">'List'</span>&#125;</span><br><span class="line">        ),</span><br><span class="line">        Route(</span><br><span class="line">            url=<span class="string">r'^&#123;prefix&#125;/&#123;lookup&#125;$'</span>,</span><br><span class="line">            mapping=&#123;<span class="string">'get'</span>: <span class="string">'retrieve'</span>&#125;,</span><br><span class="line">            name=<span class="string">'&#123;basename&#125;-detail'</span>,</span><br><span class="line">            detail=<span class="literal">True</span>,</span><br><span class="line">            initkwargs=&#123;<span class="string">'suffix'</span>: <span class="string">'Detail'</span>&#125;</span><br><span class="line">        ),</span><br><span class="line">        DynamicRoute(</span><br><span class="line">            url=<span class="string">r'^&#123;prefix&#125;/&#123;lookup&#125;/&#123;url_path&#125;$'</span>,</span><br><span class="line">            name=<span class="string">'&#123;basename&#125;-&#123;url_name&#125;'</span>,</span><br><span class="line">            detail=<span class="literal">True</span>,</span><br><span class="line">            initkwargs=&#123;&#125;</span><br><span class="line">        )</span><br><span class="line">    ]</span><br></pre></td></tr></table></figure>
+
+<p>让我们看一下我们<code>CustomReadOnlyRouter</code>将为简单视图集生成的路线。</p>
+<p><code>views.py</code>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UserViewSet</span><span class="params">(viewsets.ReadOnlyModelViewSet)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    A viewset that provides the standard actions</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    queryset = User.objects.all()</span><br><span class="line">    serializer_class = UserSerializer</span><br><span class="line">    lookup_field = <span class="string">'username'</span></span><br><span class="line"></span><br><span class="line"><span class="meta">    @action(detail=True)</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">group_names</span><span class="params">(self, request, pk=None)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        Returns a list of all the group names that the given</span></span><br><span class="line"><span class="string">        user belongs to.</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        user = self.get_object()</span><br><span class="line">        groups = user.groups.all()</span><br><span class="line">        <span class="keyword">return</span> Response([group.name <span class="keyword">for</span> group <span class="keyword">in</span> groups])</span><br></pre></td></tr></table></figure>
+
+<p><code>urls.py</code>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">router = CustomReadOnlyRouter()</span><br><span class="line">router.register(<span class="string">'users'</span>, UserViewSet)</span><br><span class="line">urlpatterns = router.urls</span><br></pre></td></tr></table></figure>
+
+<p>将生成以下映射…</p>
+<table>
+<thead>
+<tr>
+<th>URL</th>
+<th>HTTP Method</th>
+<th>Action</th>
+<th>URL Name</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>/users</td>
+<td>GET</td>
+<td>list</td>
+<td>user-list</td>
+</tr>
+<tr>
+<td>/users/{username}</td>
+<td>GET</td>
+<td>retrieve</td>
+<td>user-detail</td>
+</tr>
+<tr>
+<td>/users/{username}/group_names</td>
+<td>GET</td>
+<td>group_names</td>
+<td>user-group-names</td>
+</tr>
+</tbody></table>
+<p>有关设置<code>.routes</code>属性的另一个示例，请参见<code>SimpleRouter</code>该类的源代码。</p>
+<h2 id="高级自定义路由器"><a href="#高级自定义路由器" class="headerlink" title="高级自定义路由器"></a><a href="https://www.django-rest-framework.org/api-guide/routers/#advanced-custom-routers" target="_blank" rel="noopener">高级自定义路由器</a></h2><p>如果要提供完全自定义的行为，则可以重写<code>BaseRouter</code>和重写该<code>get_urls(self)</code>方法。该方法应检查已注册的视图集并返回URL模式列表。可以通过访问<code>self.registry</code>属性来检查已注册的前缀，视图集和基本名称元组。</p>
+<p>您可能还想覆盖该<code>get_default_basename(self, viewset)</code>方法，或者<code>basename</code>在向路由器注册视图集时始终显式设置参数。</p>
+<h1 id="第三方软件包"><a href="#第三方软件包" class="headerlink" title="第三方软件包"></a><a href="https://www.django-rest-framework.org/api-guide/routers/#third-party-packages" target="_blank" rel="noopener">第三方软件包</a></h1><p>以下第三方软件包也可用。</p>
+<h2 id="DRF嵌套路由器"><a href="#DRF嵌套路由器" class="headerlink" title="DRF嵌套路由器"></a><a href="https://www.django-rest-framework.org/api-guide/routers/#drf-nested-routers" target="_blank" rel="noopener">DRF嵌套路由器</a></h2><p>的<a href="https://github.com/alanjds/drf-nested-routers" target="_blank" rel="noopener">DRF-嵌套的路由器包</a>提供路由器和关系字段用于与嵌套资源工作。</p>
+<h2 id="ModelRouter（wq-db-rest）"><a href="#ModelRouter（wq-db-rest）" class="headerlink" title="ModelRouter（wq.db.rest）"></a><a href="https://www.django-rest-framework.org/api-guide/routers/#modelrouter-wqdbrest" target="_blank" rel="noopener">ModelRouter（wq.db.rest）</a></h2><p>所述<a href="https://wq.io/wq.db" target="_blank" rel="noopener">wq.db包</a>提供了一个先进<a href="https://wq.io/docs/router" target="_blank" rel="noopener">ModelRouter</a>延伸类（和单个实例）<code>DefaultRouter</code>用<code>register_model()</code>的API。就像Django一样<code>admin.site.register</code>，唯一需要的参数<code>rest.router.register_model</code>是模型类。可以从模型和全局配置中推断出URL前缀，序列化程序和视图集的合理默认值。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> wq.db <span class="keyword">import</span> rest</span><br><span class="line"><span class="keyword">from</span> myapp.models <span class="keyword">import</span> MyModel</span><br><span class="line"></span><br><span class="line">rest.router.register_model(MyModel)</span><br></pre></td></tr></table></figure>
+
+<h2 id="DRF扩展"><a href="#DRF扩展" class="headerlink" title="DRF扩展"></a><a href="https://www.django-rest-framework.org/api-guide/routers/#drf-extensions" target="_blank" rel="noopener">DRF扩展</a></h2><p>该<a href="https://chibisov.github.io/drf-extensions/docs/" target="_blank" rel="noopener"><code>DRF-extensions</code>软件包</a>提供了<a href="https://chibisov.github.io/drf-extensions/docs/#routers" target="_blank" rel="noopener">路由器</a>创建<a href="https://chibisov.github.io/drf-extensions/docs/#nested-routes" target="_blank" rel="noopener">嵌套viewsets</a>，<a href="https://chibisov.github.io/drf-extensions/docs/#collection-level-controllers" target="_blank" rel="noopener">收藏级控制器</a>与<a href="https://chibisov.github.io/drf-extensions/docs/#controller-endpoint-name" target="_blank" rel="noopener">定制的端点名</a>。</p>
+
+      </div>
+      
+        <br>
+        <center>谢谢欣赏！</fancybox></center>
+      
+      
+        <br>
+        
+
+
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-01-15T00:42:35+08:00">
+  <a class='notlink'>
+    <i class="fas fa-clock" aria-hidden="true"></i>
+    <p>更新于 2020年1月15日</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/django-rest-framework/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>django-rest-framework</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/django/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>django</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/restful/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>restful</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Routers/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>Routers</p></a></div>
+
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
+          
+          href="http://connect.qq.com/widget/shareqq/index.html?url=http://xuqilong.com/2020-01-15-Routers.html&title=django-rest-framework:Routers | SNH&summary=资源路由允许您快速声明给定资源控制器的所有通用路由。无需为索引声明单独的路由，而是在单行代码中声明资源丰富的路由。"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qq.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
+          
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://xuqilong.com/2020-01-15-Routers.html&title=django-rest-framework:Routers | SNH&summary=资源路由允许您快速声明给定资源控制器的所有通用路由。无需为索引声明单独的路由，而是在单行代码中声明资源丰富的路由。"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qzone.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
+          
+          href="http://service.weibo.com/share/share.php?url=http://xuqilong.com/2020-01-15-Routers.html&title=django-rest-framework:Routers | SNH&summary=资源路由允许您快速声明给定资源控制器的所有通用路由。无需为索引声明单独的路由，而是在单行代码中声明资源丰富的路由。"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/weibo.png">
+          
+        </a>
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+    </div>
+  </section>
+
+
+      
+      
+          <div class="prev-next">
+              
+              
+                  <section class="next">
+                      <span class="art-item-right" aria-hidden="true">
+                          <h6>下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
+                          <h4>
+                              <a href="/2020-01-15-ViewsSets.html" rel="prev" title="django-rest-framework:ViewsSets">
+                                  
+                                      django-rest-framework:ViewsSets
+                                  
+                              </a>
+                          </h4>
+                          
+                              
+                              <h6 class="tags">
+                                  <a class="tag" href="/tags/django-rest-framework/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> django-rest-framework</a> <a class="tag" href="/tags/django/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> django</a> <a class="tag" href="/tags/restful/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> restful</a> <a class="tag" href="/tags/Views/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> Views</a>
+                              </h6>
+                          
+                      </span>
+                  </section>
+              
+          </div>
+      
+    </section>
+  </article>
+
+
+
+  <!-- 显示推荐文章和评论 -->
+
+
+
+  <article class="post white-box comments">
+    <section class="article typo">
+      <h4><i class="fas fa-comments fa-fw" aria-hidden="true"></i>&nbsp;评论</h4>
+      
+      
+      
+      
+        <section id="comments">
+          <div id="valine_container" class="valine_thread">
+            <i class="fas fa-spinner fa-spin fa-fw"></i>
+          </div>
+        </section>
+      
+    </section>
+  </article>
+
+
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+
+  <script>
+    window.subData = {
+      title: 'django-rest-framework:Routers',
+      tools: true
+    }
+  </script>
+
+
+</div>
+<aside class='l_side'>
+  
+    
+    
+      
+      
+        
+          
+          
+        
+          
+          
+            
+              
+  <section class='widget toc-wrapper'>
+    
+<header class='pure'>
+  <div><i class="fas fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;本文目录</div>
+  
+    <!-- <div class='wrapper'><a class="s-toc rightBtn" rel="external nofollow noopener noreferrer" href="javascript:void(0)"><i class="fas fa-thumbtack fa-fw"></i></a></div> -->
+  
+</header>
+
+    <div class='content pure'>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Routers"><span class="toc-text">Routers</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#用法"><span class="toc-text">用法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#include与路由器一起使用"><span class="toc-text">include与路由器一起使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#额外操作的路由"><span class="toc-text">额外操作的路由</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#API指南"><span class="toc-text">API指南</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#SimpleRouter"><span class="toc-text">SimpleRouter</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DefaultRouter"><span class="toc-text">DefaultRouter</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#自定义路由器"><span class="toc-text">自定义路由器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义动态路线"><span class="toc-text">自定义动态路线</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#例"><span class="toc-text">例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#高级自定义路由器"><span class="toc-text">高级自定义路由器</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第三方软件包"><span class="toc-text">第三方软件包</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#DRF嵌套路由器"><span class="toc-text">DRF嵌套路由器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ModelRouter（wq-db-rest）"><span class="toc-text">ModelRouter（wq.db.rest）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DRF扩展"><span class="toc-text">DRF扩展</span></a></li></ol></li></ol>
+    </div>
+  </section>
+
+
+            
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+    
+
+  
+</aside>
+
+<footer id="footer" class="clearfix">
+  
+  
+    <div class="social-wrapper">
+      
+        
+          <a href="mailto:2279649537@qq.com"
+            class="social fas fa-envelope flat-btn"
+            target="_blank"
+            rel="external nofollow noopener noreferrer">
+          </a>
+        
+      
+        
+          <a href="https://github.com/xuqil"
+            class="social fab fa-github flat-btn"
+            target="_blank"
+            rel="external nofollow noopener noreferrer">
+          </a>
+        
+      
+    </div>
+  
+  <br>
+  <div><p>© 2019 粤ICP备19034953号</p>
+</div>
+  <div>
+    本站使用
+    <a href="https://xxx/" target="_blank" class="codename">Material X</a>
+    作为主题
+    
+      ，
+      总访问量为
+      <span id="busuanzi_value_site_pv"><i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>
+      次
+    
+    。
+  </div>
+</footer>
+<script>setLoadingBarProgress(80);</script>
+
+
+      <script>setLoadingBarProgress(60);</script>
+    </div>
+    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+
+  <script>
+    var GOOGLE_CUSTOM_SEARCH_API_KEY = "";
+    var GOOGLE_CUSTOM_SEARCH_ENGINE_ID = "";
+    var ALGOLIA_API_KEY = "";
+    var ALGOLIA_APP_ID = "";
+    var ALGOLIA_INDEX_NAME = "";
+    var AZURE_SERVICE_NAME = "";
+    var AZURE_INDEX_NAME = "";
+    var AZURE_QUERY_KEY = "";
+    var BAIDU_API_ID = "";
+    var SEARCH_SERVICE = "hexo" || "hexo";
+    var ROOT = "/"||"/";
+    if(!ROOT.endsWith('/'))ROOT += '/';
+  </script>
+
+<script src="//instant.page/1.2.2" type="module" integrity="sha384-2xV8M5griQmzyiY3CDqh1dn4z3llDVqZDqzjzcY+jCBCk/a5fXJmuZ/40JJAPeoU"></script>
+
+
+  <script async src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.5/dist/scrollreveal.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      const $reveal = $('.reveal');
+      if ($reveal.length === 0) return;
+      const sr = ScrollReveal({ distance: 0 });
+      sr.reveal('.reveal');
+    });
+  </script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      Waves.attach('.flat-btn', ['waves-button']);
+      Waves.attach('.float-btn', ['waves-button', 'waves-float']);
+      Waves.attach('.float-btn-light', ['waves-button', 'waves-float', 'waves-light']);
+      Waves.attach('.flat-box', ['waves-block']);
+      Waves.attach('.float-box', ['waves-block', 'waves-float']);
+      Waves.attach('.waves-image');
+      Waves.init();
+    });
+  </script>
+
+
+  <script async src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-busuanzi@2.3/js/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+  
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min.js"></script>
+    <script type="text/javascript">
+      $(function(){
+        if ('.cover') {
+          $('.cover').backstretch(
+          ["https://img.vim-cn.com/29/91197b04c13f512f734a76d4ac422d89dbe229.jpg"],
+          {
+            duration: "6000",
+            fade: "2500"
+          });
+        } else {
+          $.backstretch(
+          ["https://img.vim-cn.com/29/91197b04c13f512f734a76d4ac422d89dbe229.jpg"],
+          {
+            duration: "6000",
+            fade: "2500"
+          });
+        }
+      });
+    </script>
+  
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+    
+      
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/volantis@1.0.6/js/volantis.min.js"></script>
+
+    
+  
+  <script>
+  var GUEST_INFO = ['nick','mail','link'];
+  var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+    return GUEST_INFO.indexOf(item) > -1
+  });
+  var notify = 'true' == true;
+  var verify = 'true' == true;
+  var valine = new Valine();
+  valine.init({
+    el: '#valine_container',
+    notify: notify,
+    verify: verify,
+    guest_info: guest_info,
+    
+    appId: "z1uRy1ySApKgjRhi6apeU6TI-gzGzoHsz",
+    appKey: "Q2RDVfrH8i5h2m5C4C4495bw",
+    placeholder: "快来评论吧~",
+    pageSize:'10',
+    avatar:'mp',
+    lang:'zh-cn',
+    highlight:'true'
+  })
+  </script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.11/js/app.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.11/js/search.js"></script>
+
+
+
+
+
+<!-- 复制 -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  let COPY_SUCCESS = "复制成功";
+  let COPY_FAILURE = "复制失败";
+  /*页面载入完成后，创建复制按钮*/
+  !function (e, t, a) {
+    /* code */
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '  <i class="fa fa-copy"></i><span>复制</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+
+      clipboard.on('success', function(e) {
+        //您可以加入成功提示
+        console.info('Action:', e.action);
+        console.info('Text:', e.text);
+        console.info('Trigger:', e.trigger);
+        success_prompt(COPY_SUCCESS);
+        e.clearSelection();
+      });
+      clipboard.on('error', function(e) {
+        //您可以加入失败提示
+        console.error('Action:', e.action);
+        console.error('Trigger:', e.trigger);
+        fail_prompt(COPY_FAILURE);
+      });
+    }
+    initCopyCode();
+
+  }(window, document);
+
+  /**
+   * 弹出式提示框，默认1.5秒自动消失
+   * @param message 提示信息
+   * @param style 提示样式，有alert-success、alert-danger、alert-warning、alert-info
+   * @param time 消失时间
+   */
+  var prompt = function (message, style, time)
+  {
+      style = (style === undefined) ? 'alert-success' : style;
+      time = (time === undefined) ? 1500 : time*1000;
+      $('<div>')
+          .appendTo('body')
+          .addClass('alert ' + style)
+          .html(message)
+          .show()
+          .delay(time)
+          .fadeOut();
+  };
+
+  // 成功提示
+  var success_prompt = function(message, time)
+  {
+      prompt(message, 'alert-success', time);
+  };
+
+  // 失败提示
+  var fail_prompt = function(message, time)
+  {
+      prompt(message, 'alert-danger', time);
+  };
+
+  // 提醒
+  var warning_prompt = function(message, time)
+  {
+      prompt(message, 'alert-warning', time);
+  };
+
+  // 信息提示
+  var info_prompt = function(message, time)
+  {
+      prompt(message, 'alert-info', time);
+  };
+
+</script>
+ -->
+
+<!-- fancybox -->
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script>
+  let LAZY_LOAD_IMAGE = "";
+  $(".article-entry").find("fancybox").find("img").each(function () {
+      var element = document.createElement("a");
+      $(element).attr("data-fancybox", "gallery");
+      $(element).attr("href", $(this).attr("src"));
+      /* 图片采用懒加载处理时,
+       * 一般图片标签内会有个属性名来存放图片的真实地址，比如 data-original,
+       * 那么此处将原本的属性名src替换为对应属性名data-original,
+       * 修改如下
+       */
+       if (LAZY_LOAD_IMAGE) {
+         $(element).attr("href", $(this).attr("data-original"));
+       }
+      $(this).wrap(element);
+  });
+</script>
+
+
+
+
+
+  <script>setLoadingBarProgress(100);</script>
+</body>
+</html>
