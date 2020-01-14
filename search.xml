@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>list</title>
+    <url>/2020/01/14/1/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
     <title>你好</title>
     <url>/2020/01/06/heoo/</url>
     <content><![CDATA[<h2 id="一、django中配置MongoDB"><a href="#一、django中配置MongoDB" class="headerlink" title="一、django中配置MongoDB"></a>一、django中配置MongoDB</h2><h5 id="1、在Djnago中使用MongoDB数据库时，使用mongoengine模块。"><a href="#1、在Djnago中使用MongoDB数据库时，使用mongoengine模块。" class="headerlink" title="1、在Djnago中使用MongoDB数据库时，使用mongoengine模块。"></a>1、在Djnago中使用MongoDB数据库时，使用mongoengine模块。</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">pip install  mongoengine</span><br></pre></td></tr></table></figure>
