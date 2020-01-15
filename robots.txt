@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+Allow: /home/
+Allow: /archives/
+Allow: /about/
+Allow: /tags/
+Allow: /projects/
+Allow: /category/
+Disallow: /vendors/
+Disallow: /js/
+Disallow: /css/
+Disallow: /fonts/
+Disallow: /vendors/
+Disallow: /fancybox/
+Sitemap: https://xuqilong.top/sitemap.xml
+Sitemap: https://xuqilong.top/baidusitemap.xml
+
