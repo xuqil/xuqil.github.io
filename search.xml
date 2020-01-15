@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>django-rest-framework:Routers</title>
+    <title>Django REST framework:Routers</title>
     <url>/2020-01-15-Routers.html</url>
     <content><![CDATA[<p>资源路由允许您快速声明给定资源控制器的所有通用路由。无需为索引声明单独的路由，而是在单行代码中声明资源丰富的路由。</p>
 <a id="more"></a>
@@ -280,18 +280,18 @@
 <h2 id="DRF扩展"><a href="#DRF扩展" class="headerlink" title="DRF扩展"></a><a href="https://www.django-rest-framework.org/api-guide/routers/#drf-extensions" target="_blank" rel="noopener">DRF扩展</a></h2><p>该<a href="https://chibisov.github.io/drf-extensions/docs/" target="_blank" rel="noopener"><code>DRF-extensions</code>软件包</a>提供了<a href="https://chibisov.github.io/drf-extensions/docs/#routers" target="_blank" rel="noopener">路由器</a>创建<a href="https://chibisov.github.io/drf-extensions/docs/#nested-routes" target="_blank" rel="noopener">嵌套viewsets</a>，<a href="https://chibisov.github.io/drf-extensions/docs/#collection-level-controllers" target="_blank" rel="noopener">收藏级控制器</a>与<a href="https://chibisov.github.io/drf-extensions/docs/#controller-endpoint-name" target="_blank" rel="noopener">定制的端点名</a>。</p>
 ]]></content>
       <categories>
-        <category>django</category>
-        <category>django-rest-framework</category>
+        <category>Django</category>
+        <category>Django-Rest-framework</category>
       </categories>
       <tags>
-        <tag>django-rest-framework</tag>
-        <tag>django</tag>
         <tag>restful</tag>
         <tag>Routers</tag>
+        <tag>Django</tag>
+        <tag>Django-Rest-framework</tag>
       </tags>
   </entry>
   <entry>
-    <title>django-rest-framework:ViewsSets</title>
+    <title>Django REST framework:ViewsSets</title>
     <url>/2020-01-15-ViewsSets.html</url>
     <content><![CDATA[<p>在路由确定了要用于请求的控制器之后，您的控制器负责理解请求并产生适当的输出。</p>
 <a id="more"></a>
@@ -390,18 +390,18 @@
 <p>通过创建自己的基<code>ViewSet</code>类，您可以提供可以在您的API的多个视图集中重用的常见行为。</p>
 ]]></content>
       <categories>
-        <category>django</category>
-        <category>django-rest-framework</category>
+        <category>Django</category>
+        <category>Django-Rest-framework</category>
       </categories>
       <tags>
-        <tag>django-rest-framework</tag>
-        <tag>django</tag>
         <tag>restful</tag>
         <tag>Views</tag>
+        <tag>Django</tag>
+        <tag>Django-Rest-framework</tag>
       </tags>
   </entry>
   <entry>
-    <title>django-rest-framework:Generic Views</title>
+    <title>Django REST framework:Generic Views</title>
     <url>/2020-01-15-generic-views.html</url>
     <content><![CDATA[<p>Django的通用视图…是作为通用用法模式的快捷方式而开发的…它们采用视图开发中发现的某些通用习语和模式并将其抽象化，以便您可以快速编写通用数据视图而无需重复自己。</p>
 <a id="more"></a>
@@ -559,19 +559,19 @@
 <h2 id="Django-Rest多种模型"><a href="#Django-Rest多种模型" class="headerlink" title="Django Rest多种模型"></a><a href="https://www.django-rest-framework.org/api-guide/generic-views/#django-rest-multiple-models" target="_blank" rel="noopener">Django Rest多种模型</a></h2><p><a href="https://github.com/MattBroach/DjangoRestMultipleModels" target="_blank" rel="noopener">Django Rest Multiple Models</a>提供了通用视图（和混合），用于通过单个API请求发送多个序列化的模型和/或查询集。</p>
 ]]></content>
       <categories>
-        <category>django</category>
-        <category>django-rest-framework</category>
+        <category>Django</category>
+        <category>Django-Rest-framework</category>
       </categories>
       <tags>
-        <tag>django-rest-framework</tag>
-        <tag>django</tag>
         <tag>restful</tag>
         <tag>Views</tag>
+        <tag>Django</tag>
+        <tag>Django-Rest-framework</tag>
       </tags>
   </entry>
   <entry>
-    <title>django-rest-framework:Views</title>
-    <url>/2020-01-15-views.html</url>
+    <title>Django REST framework:Views</title>
+    <url>/2020-01-15-Views.html</url>
     <content><![CDATA[<p>Django的基于类的视图是对旧式视图的欢迎。</p>
 <a id="more"></a>
 
@@ -641,19 +641,19 @@
 <p>该装饰器采用一个<code>AutoSchema</code>实例，一个<code>AutoSchema</code>子类实例或<a href="https://www.django-rest-framework.org/api-guide/schemas/" target="_blank" rel="noopener">Schemas文档</a><code>ManualSchema</code>中所述的实例。您可以通过以将视图从架构生成中排除。<code>None</code></p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">@api_view(['GET'])</span></span><br><span class="line"><span class="meta">@schema(None)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">view</span><span class="params">(request)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> Response(&#123;<span class="string">"message"</span>: <span class="string">"Will not appear in schema!"</span>&#125;)</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
-        <category>django</category>
-        <category>django-rest-framework</category>
+        <category>Django</category>
+        <category>Django-Rest-framework</category>
       </categories>
       <tags>
-        <tag>django-rest-framework</tag>
-        <tag>django</tag>
         <tag>restful</tag>
         <tag>Views</tag>
+        <tag>Django</tag>
+        <tag>Django-Rest-framework</tag>
       </tags>
   </entry>
   <entry>
-    <title>django-rest-framework:Responses</title>
-    <url>/2020-01-15-responses.html</url>
+    <title>Django REST framework:Responses</title>
+    <url>/2020-01-15-Responses.html</url>
     <content><![CDATA[<p>与基本的HttpResponse对象不同，TemplateResponse对象保留视图提供的上下文详细信息以计算响应。直到需要时才在响应过程的后面计算响应的最终输出。</p>
 <a id="more"></a>
 
@@ -698,18 +698,18 @@
 <p>通常，您不需要自称<code>.render()</code>，因为它是Django的标准响应周期所处理的。</p>
 ]]></content>
       <categories>
-        <category>django</category>
-        <category>django-rest-framework</category>
+        <category>Django</category>
+        <category>Django-Rest-framework</category>
       </categories>
       <tags>
-        <tag>django-rest-framework</tag>
-        <tag>django</tag>
         <tag>restful</tag>
         <tag>Responses</tag>
+        <tag>Django</tag>
+        <tag>Django-Rest-framework</tag>
       </tags>
   </entry>
   <entry>
-    <title>django-rest-framework:Request</title>
+    <title>Django REST framework:Request</title>
     <url>/2020-01-14-requst.html</url>
     <content><![CDATA[<p>REST框架的<code>Request</code>类扩展了标准<code>HttpRequest</code>，增加了对REST框架的灵活请求解析和请求身份验证的支持。</p>
 <a id="more"></a>
@@ -772,14 +772,14 @@
 <p>请注意，由于实现原因，<code>Request</code>该类不继承自<code>HttpRequest</code>类，而是使用composition扩展了该类。</p>
 ]]></content>
       <categories>
-        <category>django</category>
-        <category>django-rest-framework</category>
+        <category>Django</category>
+        <category>Django-Rest-framework</category>
       </categories>
       <tags>
-        <tag>django-rest-framework</tag>
-        <tag>django</tag>
         <tag>restful</tag>
         <tag>request</tag>
+        <tag>Django</tag>
+        <tag>Django-Rest-framework</tag>
       </tags>
   </entry>
   <entry>
