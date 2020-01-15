@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  <title>Django REST framework:Parsers | 程序员Live</title>
+  
+  
+  <meta name="description" content="程序员Live的博客">
+  
+
+  
+
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <!-- meta -->
+  
+  
+  <meta name="baidu-site-verification" content="6wxsQjeg15" />
+  <meta name='theme-color' content='#FFFFFF'>
+  <meta name='msapplication-TileColor' content='#1BC3FB'>
+  <meta name='msapplication-config' content='https://cdn.jsdelivr.net/gh/xaoxuu/assets@master/favicon/favicons/browserconfig.xml'>
+  
+
+  <!-- link -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.10.1/css/all.min.css">
+  
+  
+  <link rel='shortcut icon' type='image/x-icon' href='https://cdn.jsdelivr.net/gh/xaoxuu/assets@master/favicon/favicon.ico'>
+  <link rel='icon' type='image/x-icon' sizes='32x32' href='https://cdn.jsdelivr.net/gh/xaoxuu/assets@master/favicon/favicons/favicon-32x32.png'>
+  <link rel='apple-touch-icon' type='image/png' sizes='180x180' href='https://cdn.jsdelivr.net/gh/xaoxuu/assets@master/favicon/favicons/apple-touch-icon.png'>
+  <link rel='mask-icon' color='#1BC3FB' href='https://cdn.jsdelivr.net/gh/xaoxuu/assets@master/favicon/favicons/safari-pinned-tab.svg'>
+  <link rel='manifest' href='https://cdn.jsdelivr.net/gh/xaoxuu/assets@master/favicon/favicons/site.webmanifest'>
+  
+
+  
+
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.11.26/css/style.css">
+
+  
+
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+
+  
+  
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  
+  
+  <div class="cover-wrapper">
+    <cover class='cover post half'>
+      
+        
+  <h1 class='title'>程序员Live</h1>
+
+
+  <div class="m_search">
+    <form name="searchform" class="form u-search-form">
+      <input type="text" class="input u-search-input" placeholder="" />
+      <i class="icon fas fa-search fa-fw"></i>
+    </form>
+  </div>
+
+<div class='menu navgation'>
+  <ul class='h-list'>
+    
+      
+        <li>
+          <a class="nav home" href="/"
+            
+            
+            id="home">
+            <i class='fas fa-rss fa-fw'></i>&nbsp;博文
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/projects/"
+            
+            
+            id="projects">
+            <i class='fas fa-code-branch fa-fw'></i>&nbsp;项目
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/friends/"
+            
+              rel="nofollow"
+            
+            
+            id="friends">
+            <i class='fas fa-link fa-fw'></i>&nbsp;友链
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/about/"
+            
+              rel="nofollow"
+            
+            
+            id="about">
+            <i class='fas fa-info-circle fa-fw'></i>&nbsp;关于
+          </a>
+        </li>
+      
+    
+  </ul>
+</div>
+
+      
+    </cover>
+    <header class="l_header pure">
+  <div id="loading-bar-wrapper">
+    <div id="loading-bar" class="pure"></div>
+  </div>
+
+	<div class='wrapper'>
+		<div class="nav-main container container--flex">
+      <a class="logo flat-box" href='/' >
+        
+          程序员Live
+        
+      </a>
+			<div class='menu navgation'>
+				<ul class='h-list'>
+          
+  					
+  						<li>
+								<a class="nav flat-box" href="/"
+                  
+                  
+                  id="home">
+									<i class='fas fa-grin fa-fw'></i>&nbsp;首页
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/categories/"
+                  
+                    rel="nofollow"
+                  
+                  
+                  id="categories">
+									<i class='fas fa-folder-open fa-fw'></i>&nbsp;分类
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/tags/"
+                  
+                    rel="nofollow"
+                  
+                  
+                  id="tags">
+									<i class='fas fa-hashtag fa-fw'></i>&nbsp;标签
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/archives/"
+                  
+                    rel="nofollow"
+                  
+                  
+                  id="archives">
+									<i class='fas fa-archive fa-fw'></i>&nbsp;归档
+								</a>
+							</li>
+      			
+      		
+				</ul>
+			</div>
+
+			
+				<div class="m_search">
+					<form name="searchform" class="form u-search-form">
+						<input type="text" class="input u-search-input" placeholder="搜索" />
+						<i class="icon fas fa-search fa-fw"></i>
+					</form>
+				</div>
+			
+			<ul class='switcher h-list'>
+				
+					<li class='s-search'><a class="fas fa-search fa-fw" href='javascript:void(0)'></a></li>
+				
+				<li class='s-menu'><a class="fas fa-bars fa-fw" href='javascript:void(0)'></a></li>
+			</ul>
+		</div>
+
+		<div class='nav-sub container container--flex'>
+			<a class="logo flat-box"></a>
+			<ul class='switcher h-list'>
+				<li class='s-comment'><a class="flat-btn fas fa-comments fa-fw" href='javascript:void(0)'></a></li>
+        
+          <li class='s-toc'><a class="flat-btn fas fa-list fa-fw" href='javascript:void(0)'></a></li>
+        
+			</ul>
+		</div>
+	</div>
+</header>
+	<aside class="menu-phone">
+    <header>
+		<nav class="menu navgation">
+      <ul>
+        
+          
+            <li>
+							<a class="nav flat-box" href="/"
+                
+                
+                id="home">
+								<i class='fas fa-clock fa-fw'></i>&nbsp;近期文章
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/archives/"
+                
+                  rel="nofollow"
+                
+                
+                id="archives">
+								<i class='fas fa-archive fa-fw'></i>&nbsp;文章归档
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/projects/"
+                
+                
+                id="projects">
+								<i class='fas fa-code-branch fa-fw'></i>&nbsp;开源项目
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/friends/"
+                
+                  rel="nofollow"
+                
+                
+                id="friends">
+								<i class='fas fa-link fa-fw'></i>&nbsp;我的友链
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/about/"
+                
+                  rel="nofollow"
+                
+                
+                id="about">
+								<i class='fas fa-info-circle fa-fw'></i>&nbsp;关于小站
+							</a>
+            </li>
+          
+       
+      </ul>
+		</nav>
+    </header>
+	</aside>
+<script>setLoadingBarProgress(40);</script>
+
+  </div>
+
+
+  <div class="l_body">
+    <div class='body-wrapper'>
+      <div class='l_main'>
+  
+
+  <article id="post" class="post white-box article-type-post" itemscope itemprop="blogPost">
+    
+
+
+  <section class='meta'>
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  
+    <h1 class="title">
+      <a href="/2020-01-16-Parsers.html">
+        Django REST framework:Parsers
+      </a>
+    </h1>
+  
+
+
+      
+      <div class='new-meta-box'>
+        
+          
+        
+          
+            
+  <div class='new-meta-item author'>
+    
+      <a href="https://xuqilong.top" rel="nofollow">
+        
+          <i class="fas fa-user" aria-hidden="true"></i>
+        
+        <p>xuqilong</p>
+      </a>
+    
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2020-01-16</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/Django/Django-Rest-framework/' rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>Django&nbsp;/&nbsp;Django-Rest-framework</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+  
+    <div class="new-meta-item browse busuanzi">
+      <a class='notlink'>
+        <i class="fas fa-eye" aria-hidden="true"></i>
+        <p>
+          <span id="busuanzi_value_page_pv">
+            <i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i>
+          </span>
+        </p>
+      </a>
+    </div>
+  
+
+
+          
+        
+          
+            
+  
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+    <section class="article typo">
+      <div class="article-entry" itemprop="articleBody">
+        <p>机器交互Web服务倾向于使用比表单编码更多的结构化格式来发送数据，因为它们发送的数据比简单表单还要复杂。</p>
+<a id="more"></a>
+
+<h1 id="解析器-Parsers"><a href="#解析器-Parsers" class="headerlink" title="解析器(Parsers)"></a><a href="https://www.django-rest-framework.org/api-guide/parsers/#parsers" target="_blank" rel="noopener">解析器(Parsers)</a></h1><blockquote>
+<p>机器交互Web服务倾向于使用比表单编码更多的结构化格式来发送数据，因为它们发送的数据比简单表单还要复杂。</p>
+<p>— <a href="https://groups.google.com/d/topic/django-developers/dxI4qVzrBY4/discussion" target="_blank" rel="noopener">Django开发人员小组</a> Malcom Tredinnick</p>
+</blockquote>
+<p>REST框架包括许多内置的Parser类，使您可以接受各种媒体类型的请求。还支持定义自己的自定义解析器，这使您可以灵活地设计API接受的媒体类型。</p>
+<h2 id="如何确定解析器"><a href="#如何确定解析器" class="headerlink" title="如何确定解析器"></a><a href="https://www.django-rest-framework.org/api-guide/parsers/#how-the-parser-is-determined" target="_blank" rel="noopener">如何确定解析器</a></h2><p>视图的有效解析器集始终定义为类列表。当 <code>request.data</code>被访问时，REST框架将检查<code>Content-Type</code>传入请求上的标头，并确定使用哪个解析器来解析请求内容。</p>
+<hr>
+<p><strong>注意</strong>：开发客户端应用程序时，切记要确保<code>Content-Type</code>在HTTP请求中发送数据时设置头。</p>
+<p>如果您未设置内容类型，则大多数客户端将默认使用<code>&#39;application/x-www-form-urlencoded&#39;</code>，这可能不是您想要的。</p>
+<p>例如，如果要<code>json</code>使用jQuery和<a href="https://api.jquery.com/jQuery.ajax/" target="_blank" rel="noopener">.ajax（）方法</a>发送编码数据，则应确保包括该<code>contentType: &#39;application/json&#39;</code>设置。</p>
+<hr>
+<h2 id="设置解析器"><a href="#设置解析器" class="headerlink" title="设置解析器"></a><a href="https://www.django-rest-framework.org/api-guide/parsers/#setting-the-parsers" target="_blank" rel="noopener">设置解析器</a></h2><p>可以使用该<code>DEFAULT_PARSER_CLASSES</code>设置全局设置默认的解析器集。例如，以下设置将仅允许带有<code>JSON</code>内容的请求，而不是默认的JSON或表单数据。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">REST_FRAMEWORK = &#123;</span><br><span class="line">    <span class="string">'DEFAULT_PARSER_CLASSES'</span>: [</span><br><span class="line">        <span class="string">'rest_framework.parsers.JSONParser'</span>,</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>您还可以使用<code>APIView</code>基于类的视图来设置用于单个视图或视图集的解析器。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> rest_framework.parsers <span class="keyword">import</span> JSONParser</span><br><span class="line"><span class="keyword">from</span> rest_framework.response <span class="keyword">import</span> Response</span><br><span class="line"><span class="keyword">from</span> rest_framework.views <span class="keyword">import</span> APIView</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ExampleView</span><span class="params">(APIView)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    A view that can accept POST requests with JSON content.</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    parser_classes = [JSONParser]</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">post</span><span class="params">(self, request, format=None)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> Response(&#123;<span class="string">'received data'</span>: request.data&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>或者，如果您将<code>@api_view</code>装饰器与基于函数的视图一起使用。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> rest_framework.decorators <span class="keyword">import</span> api_view</span><br><span class="line"><span class="keyword">from</span> rest_framework.decorators <span class="keyword">import</span> parser_classes</span><br><span class="line"><span class="keyword">from</span> rest_framework.parsers <span class="keyword">import</span> JSONParser</span><br><span class="line"></span><br><span class="line"><span class="meta">@api_view(['POST'])</span></span><br><span class="line"><span class="meta">@parser_classes([JSONParser])</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">example_view</span><span class="params">(request, format=None)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    A view that can accept POST requests with JSON content.</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="keyword">return</span> Response(&#123;<span class="string">'received data'</span>: request.data&#125;)</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="API参考"><a href="#API参考" class="headerlink" title="API参考"></a><a href="https://www.django-rest-framework.org/api-guide/parsers/#api-reference" target="_blank" rel="noopener">API参考</a></h1><h2 id="JSONParser"><a href="#JSONParser" class="headerlink" title="JSONParser"></a><a href="https://www.django-rest-framework.org/api-guide/parsers/#jsonparser" target="_blank" rel="noopener">JSONParser</a></h2><p>解析<code>JSON</code>请求内容。</p>
+<p><strong>.media_type</strong>：<code>application/json</code></p>
+<h2 id="FormParser"><a href="#FormParser" class="headerlink" title="FormParser"></a><a href="https://www.django-rest-framework.org/api-guide/parsers/#formparser" target="_blank" rel="noopener">FormParser</a></h2><p>解析HTML表单内容。 <code>request.data</code>将填充<code>QueryDict</code>的数据。</p>
+<p>您通常希望同时使用<code>FormParser</code>和两者，<code>MultiPartParser</code>以便完全支持HTML表单数据。</p>
+<p><strong>.media_type</strong>：<code>application/x-www-form-urlencoded</code></p>
+<h2 id="MultiPartParser"><a href="#MultiPartParser" class="headerlink" title="MultiPartParser"></a><a href="https://www.django-rest-framework.org/api-guide/parsers/#multipartparser" target="_blank" rel="noopener">MultiPartParser</a></h2><p>解析多部分HTML表单内容，支持文件上传。两者都<code>request.data</code>将填充<code>QueryDict</code>。</p>
+<p>您通常希望同时使用<code>FormParser</code>和两者，<code>MultiPartParser</code>以便完全支持HTML表单数据。</p>
+<p><strong>.media_type</strong>：<code>multipart/form-data</code></p>
+<h2 id="FileUploadParser"><a href="#FileUploadParser" class="headerlink" title="FileUploadParser"></a><a href="https://www.django-rest-framework.org/api-guide/parsers/#fileuploadparser" target="_blank" rel="noopener">FileUploadParser</a></h2><p>解析原始文件上传内容。该<code>request.data</code>属性将是一个字典，<code>&#39;file&#39;</code>其中包含包含上载文件的单个键。</p>
+<p>如果通过URL关键字参数<code>FileUploadParser</code>调用与with一起使用的视图<code>filename</code>，则该参数将用作文件名。</p>
+<p>如果在没有<code>filename</code>URL关键字参数的情况下调用它，则客户端必须在<code>Content-Disposition</code>HTTP标头中设置文件名。例如<code>Content-Disposition: attachment; filename=upload.jpg</code>。</p>
+<p><strong>.media_type</strong>：<code>*/*</code></p>
+<h5 id="笔记："><a href="#笔记：" class="headerlink" title="笔记："></a><a href="https://www.django-rest-framework.org/api-guide/parsers/#notes" target="_blank" rel="noopener">笔记：</a></h5><ul>
+<li>的<code>FileUploadParser</code>是与本地客户端的使用，可以将文件上传的原始数据请求。对于基于Web的上载，或者对于具有分段上载支持的本机客户端，应使用<code>MultiPartParser</code>代替。</li>
+<li>由于此解析器<code>media_type</code>匹配任何内容类型，<code>FileUploadParser</code>因此通常应该是API视图上设置的唯一解析器。</li>
+<li><code>FileUploadParser</code>遵守Django的标准<code>FILE_UPLOAD_HANDLERS</code>设置和<code>request.upload_handlers</code>属性。有关更多详细信息，请参见<a href="https://docs.djangoproject.com/en/stable/topics/http/file-uploads/#upload-handlers" target="_blank" rel="noopener">Django文档</a>。</li>
+</ul>
+<h5 id="基本用法示例："><a href="#基本用法示例：" class="headerlink" title="基本用法示例："></a><a href="https://www.django-rest-framework.org/api-guide/parsers/#basic-usage-example" target="_blank" rel="noopener">基本用法示例：</a></h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># views.py</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FileUploadView</span><span class="params">(views.APIView)</span>:</span></span><br><span class="line">    parser_classes = [FileUploadParser]</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">put</span><span class="params">(self, request, filename, format=None)</span>:</span></span><br><span class="line">        file_obj = request.data[<span class="string">'file'</span>]</span><br><span class="line">        <span class="comment"># ...</span></span><br><span class="line">        <span class="comment"># do some stuff with uploaded file</span></span><br><span class="line">        <span class="comment"># ...</span></span><br><span class="line">        <span class="keyword">return</span> Response(status=<span class="number">204</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># urls.py</span></span><br><span class="line">urlpatterns = [</span><br><span class="line">    <span class="comment"># ...</span></span><br><span class="line">    url(<span class="string">r'^upload/(?P&lt;filename&gt;[^/]+)$'</span>, FileUploadView.as_view())</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="自定义解析器"><a href="#自定义解析器" class="headerlink" title="自定义解析器"></a><a href="https://www.django-rest-framework.org/api-guide/parsers/#custom-parsers" target="_blank" rel="noopener">自定义解析器</a></h1><p>要实现自定义解析器，应重写<code>BaseParser</code>，设置<code>.media_type</code>属性并实现<code>.parse(self, stream, media_type, parser_context)</code>方法。</p>
+<p>该方法应返回将用于填充<code>request.data</code>属性的数据。</p>
+<p>传递给的参数<code>.parse()</code>是：</p>
+<h3 id="stream"><a href="#stream" class="headerlink" title="stream"></a><a href="https://www.django-rest-framework.org/api-guide/parsers/#stream" target="_blank" rel="noopener">stream</a></h3><p>类似于流的对象，表示请求的主体。</p>
+<h3 id="media-type"><a href="#media-type" class="headerlink" title="media_type"></a><a href="https://www.django-rest-framework.org/api-guide/parsers/#media_type" target="_blank" rel="noopener">media_type</a></h3><p>可选的。如果提供，这是传入请求内容的媒体类型。</p>
+<p>根据请求的<code>Content-Type:</code>header，它可能比渲染器的<code>media_type</code>属性更具体，并且可能包括媒体类型参数。例如<code>&quot;text/plain; charset=utf-8&quot;</code>。</p>
+<h3 id="parser-context"><a href="#parser-context" class="headerlink" title="parser_context"></a><a href="https://www.django-rest-framework.org/api-guide/parsers/#parser_context" target="_blank" rel="noopener">parser_context</a></h3><p>可选的。如果提供，则此参数将是一个字典，其中包含解析请求内容可能需要的任何其他上下文。</p>
+<p>默认情况下，这将包括以下键：<code>view</code>，<code>request</code>，<code>args</code>，<code>kwargs</code>。</p>
+<h2 id="例"><a href="#例" class="headerlink" title="例"></a><a href="https://www.django-rest-framework.org/api-guide/parsers/#example" target="_blank" rel="noopener">例</a></h2><p>下面是一个示例纯文本解析器，它将<code>request.data</code>使用代表请求主体的字符串填充属性。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PlainTextParser</span><span class="params">(BaseParser)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Plain text parser.</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    media_type = <span class="string">'text/plain'</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">parse</span><span class="params">(self, stream, media_type=None, parser_context=None)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        Simply return a string representing the body of the request.</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">return</span> stream.read()</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="第三方软件包"><a href="#第三方软件包" class="headerlink" title="第三方软件包"></a><a href="https://www.django-rest-framework.org/api-guide/parsers/#third-party-packages" target="_blank" rel="noopener">第三方软件包</a></h1><p>以下第三方软件包也可用。</p>
+<h2 id="YAML"><a href="#YAML" class="headerlink" title="YAML"></a><a href="https://www.django-rest-framework.org/api-guide/parsers/#yaml" target="_blank" rel="noopener">YAML</a></h2><p><a href="https://jpadilla.github.io/django-rest-framework-yaml/" target="_blank" rel="noopener">REST框架YAML</a>提供了<a href="http://www.yaml.org/" target="_blank" rel="noopener">YAML</a>解析和渲染支持。它以前直接包含在REST框架程序包中，现在已作为第三方程序包受支持。</p>
+<h4 id="安装与配置"><a href="#安装与配置" class="headerlink" title="安装与配置"></a><a href="https://www.django-rest-framework.org/api-guide/parsers/#installation-configuration" target="_blank" rel="noopener">安装与配置</a></h4><p>使用pip安装。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pip install djangorestframework-yaml</span><br></pre></td></tr></table></figure>
+
+<p>修改您的REST框架设置。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">REST_FRAMEWORK = &#123;</span><br><span class="line">    <span class="string">'DEFAULT_PARSER_CLASSES'</span>: [</span><br><span class="line">        <span class="string">'rest_framework_yaml.parsers.YAMLParser'</span>,</span><br><span class="line">    ],</span><br><span class="line">    <span class="string">'DEFAULT_RENDERER_CLASSES'</span>: [</span><br><span class="line">        <span class="string">'rest_framework_yaml.renderers.YAMLRenderer'</span>,</span><br><span class="line">    ],</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="XML格式"><a href="#XML格式" class="headerlink" title="XML格式"></a><a href="https://www.django-rest-framework.org/api-guide/parsers/#xml" target="_blank" rel="noopener">XML格式</a></h2><p><a href="https://jpadilla.github.io/django-rest-framework-xml/" target="_blank" rel="noopener">REST Framework XML</a>提供了一种简单的非正式XML格式。它以前直接包含在REST框架程序包中，现在已作为第三方程序包受支持。</p>
+<h4 id="安装与配置-1"><a href="#安装与配置-1" class="headerlink" title="安装与配置"></a><a href="https://www.django-rest-framework.org/api-guide/parsers/#installation-configuration_1" target="_blank" rel="noopener">安装与配置</a></h4><p>使用pip安装。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pip install djangorestframework-xml</span><br></pre></td></tr></table></figure>
+
+<p>修改您的REST框架设置。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">REST_FRAMEWORK = &#123;</span><br><span class="line">    <span class="string">'DEFAULT_PARSER_CLASSES'</span>: [</span><br><span class="line">        <span class="string">'rest_framework_xml.parsers.XMLParser'</span>,</span><br><span class="line">    ],</span><br><span class="line">    <span class="string">'DEFAULT_RENDERER_CLASSES'</span>: [</span><br><span class="line">        <span class="string">'rest_framework_xml.renderers.XMLRenderer'</span>,</span><br><span class="line">    ],</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="消息包"><a href="#消息包" class="headerlink" title="消息包"></a><a href="https://www.django-rest-framework.org/api-guide/parsers/#messagepack" target="_blank" rel="noopener">消息包</a></h2><p><a href="https://github.com/juanriaza/django-rest-framework-msgpack" target="_blank" rel="noopener">MessagePack</a>是一种快速，高效的二进制序列化格式。 <a href="https://github.com/juanriaza" target="_blank" rel="noopener">Juan Riaza</a>维护<a href="https://github.com/juanriaza/django-rest-framework-msgpack" target="_blank" rel="noopener">djangorestframework-msgpack</a>软件包，该软件包为REST框架提供MessagePack渲染器和解析器支持。</p>
+<h2 id="CamelCase-JSON"><a href="#CamelCase-JSON" class="headerlink" title="CamelCase JSON"></a><a href="https://www.django-rest-framework.org/api-guide/parsers/#camelcase-json" target="_blank" rel="noopener">CamelCase JSON</a></h2><p><a href="https://github.com/vbabiy/djangorestframework-camel-case" target="_blank" rel="noopener">djangorestframework-camel-case</a>提供REST框架<a href="https://github.com/vbabiy/djangorestframework-camel-case" target="_blank" rel="noopener">的驼峰式</a> JSON渲染器和解析器。这允许序列化程序使用Python样式的带下划线的字段名称，但在API中以Javascript样式的驼峰式大小写字段名称公开。它由<a href="https://github.com/vbabiy" target="_blank" rel="noopener">Vitaly Babiy</a>维护。</p>
+
+      </div>
+      
+        <br>
+        <center>谢谢欣赏！</fancybox></center>
+      
+      
+        <br>
+        
+
+
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-01-16T01:05:23+08:00">
+  <a class='notlink'>
+    <i class="fas fa-clock" aria-hidden="true"></i>
+    <p>更新于 2020年1月16日</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/restful/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>restful</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Django/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>Django</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Django-Rest-framework/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>Django-Rest-framework</p></a></div>
+
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
+          
+          href="http://connect.qq.com/widget/shareqq/index.html?url=https://xuqilong.top/2020-01-16-Parsers.html&title=Django REST framework:Parsers | 程序员Live&summary=机器交互Web服务倾向于使用比表单编码更多的结构化格式来发送数据，因为它们发送的数据比简单表单还要复杂。"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qq.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
+          
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://xuqilong.top/2020-01-16-Parsers.html&title=Django REST framework:Parsers | 程序员Live&summary=机器交互Web服务倾向于使用比表单编码更多的结构化格式来发送数据，因为它们发送的数据比简单表单还要复杂。"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qzone.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
+          
+          href="http://service.weibo.com/share/share.php?url=https://xuqilong.top/2020-01-16-Parsers.html&title=Django REST framework:Parsers | 程序员Live&summary=机器交互Web服务倾向于使用比表单编码更多的结构化格式来发送数据，因为它们发送的数据比简单表单还要复杂。"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/weibo.png">
+          
+        </a>
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+    </div>
+  </section>
+
+
+      
+      
+          <div class="prev-next">
+              
+              
+                  <section class="next">
+                      <span class="art-item-right" aria-hidden="true">
+                          <h6>下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
+                          <h4>
+                              <a href="/2020-01-15-Routers.html" rel="prev" title="Django REST framework:Routers">
+                                  
+                                      Django REST framework:Routers
+                                  
+                              </a>
+                          </h4>
+                          
+                              
+                              <h6 class="tags">
+                                  <a class="tag" href="/tags/restful/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> restful</a> <a class="tag" href="/tags/Routers/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> Routers</a> <a class="tag" href="/tags/Django/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> Django</a> <a class="tag" href="/tags/Django-Rest-framework/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> Django-Rest-framework</a>
+                              </h6>
+                          
+                      </span>
+                  </section>
+              
+          </div>
+      
+    </section>
+  </article>
+
+
+
+  <!-- 显示推荐文章和评论 -->
+
+
+
+  <article class="post white-box comments">
+    <section class="article typo">
+      <h4><i class="fas fa-comments fa-fw" aria-hidden="true"></i>&nbsp;评论</h4>
+      
+      
+      
+      
+        <section id="comments">
+          <div id="valine_container" class="valine_thread">
+            <i class="fas fa-spinner fa-spin fa-fw"></i>
+          </div>
+        </section>
+      
+    </section>
+  </article>
+
+
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+
+  <script>
+    window.subData = {
+      title: 'Django REST framework:Parsers',
+      tools: true
+    }
+  </script>
+
+
+</div>
+<aside class='l_side'>
+  
+    
+    
+      
+      
+        
+          
+          
+        
+          
+          
+            
+              
+  <section class='widget toc-wrapper'>
+    
+<header class='pure'>
+  <div><i class="fas fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;本文目录</div>
+  
+    <!-- <div class='wrapper'><a class="s-toc rightBtn" rel="external nofollow noopener noreferrer" href="javascript:void(0)"><i class="fas fa-thumbtack fa-fw"></i></a></div> -->
+  
+</header>
+
+    <div class='content pure'>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#解析器-Parsers"><span class="toc-text">解析器(Parsers)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#如何确定解析器"><span class="toc-text">如何确定解析器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#设置解析器"><span class="toc-text">设置解析器</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#API参考"><span class="toc-text">API参考</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#JSONParser"><span class="toc-text">JSONParser</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FormParser"><span class="toc-text">FormParser</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MultiPartParser"><span class="toc-text">MultiPartParser</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FileUploadParser"><span class="toc-text">FileUploadParser</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#笔记："><span class="toc-text">笔记：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#基本用法示例："><span class="toc-text">基本用法示例：</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#自定义解析器"><span class="toc-text">自定义解析器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#stream"><span class="toc-text">stream</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#media-type"><span class="toc-text">media_type</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#parser-context"><span class="toc-text">parser_context</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#例"><span class="toc-text">例</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第三方软件包"><span class="toc-text">第三方软件包</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#YAML"><span class="toc-text">YAML</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#安装与配置"><span class="toc-text">安装与配置</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#XML格式"><span class="toc-text">XML格式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#安装与配置-1"><span class="toc-text">安装与配置</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#消息包"><span class="toc-text">消息包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CamelCase-JSON"><span class="toc-text">CamelCase JSON</span></a></li></ol></li></ol>
+    </div>
+  </section>
+
+
+            
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+    
+
+  
+</aside>
+
+<footer id="footer" class="clearfix">
+  
+  
+    <div class="social-wrapper">
+      
+        
+          <a href="mailto:2279649537@qq.com"
+            class="social fas fa-envelope flat-btn"
+            target="_blank"
+            rel="external nofollow noopener noreferrer">
+          </a>
+        
+      
+        
+          <a href="https://github.com/xuqil"
+            class="social fab fa-github flat-btn"
+            target="_blank"
+            rel="external nofollow noopener noreferrer">
+          </a>
+        
+      
+    </div>
+  
+  <br>
+  <div><p>© 2019 粤ICP备19034953号</p>
+</div>
+  <div>
+    本站使用
+    <a href="https://xxx/" target="_blank" class="codename">Material X</a>
+    作为主题
+    
+      ，
+      总访问量为
+      <span id="busuanzi_value_site_pv"><i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>
+      次
+    
+    。
+  </div>
+</footer>
+<script>setLoadingBarProgress(80);</script>
+
+
+      <script>setLoadingBarProgress(60);</script>
+    </div>
+    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+
+  <script>
+    var GOOGLE_CUSTOM_SEARCH_API_KEY = "";
+    var GOOGLE_CUSTOM_SEARCH_ENGINE_ID = "";
+    var ALGOLIA_API_KEY = "";
+    var ALGOLIA_APP_ID = "";
+    var ALGOLIA_INDEX_NAME = "";
+    var AZURE_SERVICE_NAME = "";
+    var AZURE_INDEX_NAME = "";
+    var AZURE_QUERY_KEY = "";
+    var BAIDU_API_ID = "";
+    var SEARCH_SERVICE = "hexo" || "hexo";
+    var ROOT = "/"||"/";
+    if(!ROOT.endsWith('/'))ROOT += '/';
+  </script>
+
+<script src="//instant.page/1.2.2" type="module" integrity="sha384-2xV8M5griQmzyiY3CDqh1dn4z3llDVqZDqzjzcY+jCBCk/a5fXJmuZ/40JJAPeoU"></script>
+
+
+  <script async src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.5/dist/scrollreveal.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      const $reveal = $('.reveal');
+      if ($reveal.length === 0) return;
+      const sr = ScrollReveal({ distance: 0 });
+      sr.reveal('.reveal');
+    });
+  </script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      Waves.attach('.flat-btn', ['waves-button']);
+      Waves.attach('.float-btn', ['waves-button', 'waves-float']);
+      Waves.attach('.float-btn-light', ['waves-button', 'waves-float', 'waves-light']);
+      Waves.attach('.flat-box', ['waves-block']);
+      Waves.attach('.float-box', ['waves-block', 'waves-float']);
+      Waves.attach('.waves-image');
+      Waves.init();
+    });
+  </script>
+
+
+  <script async src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-busuanzi@2.3/js/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+  
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min.js"></script>
+    <script type="text/javascript">
+      $(function(){
+        if ('.cover') {
+          $('.cover').backstretch(
+          ["https://img.vim-cn.com/29/91197b04c13f512f734a76d4ac422d89dbe229.jpg"],
+          {
+            duration: "6000",
+            fade: "2500"
+          });
+        } else {
+          $.backstretch(
+          ["https://img.vim-cn.com/29/91197b04c13f512f734a76d4ac422d89dbe229.jpg"],
+          {
+            duration: "6000",
+            fade: "2500"
+          });
+        }
+      });
+    </script>
+  
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+    
+      
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/volantis@1.0.6/js/volantis.min.js"></script>
+
+    
+  
+  <script>
+  var GUEST_INFO = ['nick','mail','link'];
+  var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+    return GUEST_INFO.indexOf(item) > -1
+  });
+  var notify = 'true' == true;
+  var verify = 'true' == true;
+  var valine = new Valine();
+  valine.init({
+    el: '#valine_container',
+    notify: notify,
+    verify: verify,
+    guest_info: guest_info,
+    
+    appId: "z1uRy1ySApKgjRhi6apeU6TI-gzGzoHsz",
+    appKey: "Q2RDVfrH8i5h2m5C4C4495bw",
+    placeholder: "快来评论吧~",
+    pageSize:'10',
+    avatar:'mp',
+    lang:'zh-cn',
+    highlight:'true'
+  })
+  </script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.11/js/app.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.11/js/search.js"></script>
+
+
+
+
+
+<!-- 复制 -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  let COPY_SUCCESS = "复制成功";
+  let COPY_FAILURE = "复制失败";
+  /*页面载入完成后，创建复制按钮*/
+  !function (e, t, a) {
+    /* code */
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '  <i class="fa fa-copy"></i><span>复制</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+
+      clipboard.on('success', function(e) {
+        //您可以加入成功提示
+        console.info('Action:', e.action);
+        console.info('Text:', e.text);
+        console.info('Trigger:', e.trigger);
+        success_prompt(COPY_SUCCESS);
+        e.clearSelection();
+      });
+      clipboard.on('error', function(e) {
+        //您可以加入失败提示
+        console.error('Action:', e.action);
+        console.error('Trigger:', e.trigger);
+        fail_prompt(COPY_FAILURE);
+      });
+    }
+    initCopyCode();
+
+  }(window, document);
+
+  /**
+   * 弹出式提示框，默认1.5秒自动消失
+   * @param message 提示信息
+   * @param style 提示样式，有alert-success、alert-danger、alert-warning、alert-info
+   * @param time 消失时间
+   */
+  var prompt = function (message, style, time)
+  {
+      style = (style === undefined) ? 'alert-success' : style;
+      time = (time === undefined) ? 1500 : time*1000;
+      $('<div>')
+          .appendTo('body')
+          .addClass('alert ' + style)
+          .html(message)
+          .show()
+          .delay(time)
+          .fadeOut();
+  };
+
+  // 成功提示
+  var success_prompt = function(message, time)
+  {
+      prompt(message, 'alert-success', time);
+  };
+
+  // 失败提示
+  var fail_prompt = function(message, time)
+  {
+      prompt(message, 'alert-danger', time);
+  };
+
+  // 提醒
+  var warning_prompt = function(message, time)
+  {
+      prompt(message, 'alert-warning', time);
+  };
+
+  // 信息提示
+  var info_prompt = function(message, time)
+  {
+      prompt(message, 'alert-info', time);
+  };
+
+</script>
+ -->
+
+<!-- fancybox -->
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script>
+  let LAZY_LOAD_IMAGE = "";
+  $(".article-entry").find("fancybox").find("img").each(function () {
+      var element = document.createElement("a");
+      $(element).attr("data-fancybox", "gallery");
+      $(element).attr("href", $(this).attr("src"));
+      /* 图片采用懒加载处理时,
+       * 一般图片标签内会有个属性名来存放图片的真实地址，比如 data-original,
+       * 那么此处将原本的属性名src替换为对应属性名data-original,
+       * 修改如下
+       */
+       if (LAZY_LOAD_IMAGE) {
+         $(element).attr("href", $(this).attr("data-original"));
+       }
+      $(this).wrap(element);
+  });
+</script>
+
+
+
+
+
+  <script>setLoadingBarProgress(100);</script>
+</body>
+</html>

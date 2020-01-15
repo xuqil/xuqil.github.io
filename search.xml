@@ -1,6 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Django REST framework:Parsers</title>
+    <url>/2020-01-16-Parsers.html</url>
+    <content><![CDATA[<p>机器交互Web服务倾向于使用比表单编码更多的结构化格式来发送数据，因为它们发送的数据比简单表单还要复杂。</p>
+<a id="more"></a>
+
+<h1 id="解析器-Parsers"><a href="#解析器-Parsers" class="headerlink" title="解析器(Parsers)"></a><a href="https://www.django-rest-framework.org/api-guide/parsers/#parsers" target="_blank" rel="noopener">解析器(Parsers)</a></h1><blockquote>
+<p>机器交互Web服务倾向于使用比表单编码更多的结构化格式来发送数据，因为它们发送的数据比简单表单还要复杂。</p>
+<p>— <a href="https://groups.google.com/d/topic/django-developers/dxI4qVzrBY4/discussion" target="_blank" rel="noopener">Django开发人员小组</a> Malcom Tredinnick</p>
+</blockquote>
+<p>REST框架包括许多内置的Parser类，使您可以接受各种媒体类型的请求。还支持定义自己的自定义解析器，这使您可以灵活地设计API接受的媒体类型。</p>
+<h2 id="如何确定解析器"><a href="#如何确定解析器" class="headerlink" title="如何确定解析器"></a><a href="https://www.django-rest-framework.org/api-guide/parsers/#how-the-parser-is-determined" target="_blank" rel="noopener">如何确定解析器</a></h2><p>视图的有效解析器集始终定义为类列表。当 <code>request.data</code>被访问时，REST框架将检查<code>Content-Type</code>传入请求上的标头，并确定使用哪个解析器来解析请求内容。</p>
+<hr>
+<p><strong>注意</strong>：开发客户端应用程序时，切记要确保<code>Content-Type</code>在HTTP请求中发送数据时设置头。</p>
+<p>如果您未设置内容类型，则大多数客户端将默认使用<code>&#39;application/x-www-form-urlencoded&#39;</code>，这可能不是您想要的。</p>
+<p>例如，如果要<code>json</code>使用jQuery和<a href="https://api.jquery.com/jQuery.ajax/" target="_blank" rel="noopener">.ajax（）方法</a>发送编码数据，则应确保包括该<code>contentType: &#39;application/json&#39;</code>设置。</p>
+<hr>
+<h2 id="设置解析器"><a href="#设置解析器" class="headerlink" title="设置解析器"></a><a href="https://www.django-rest-framework.org/api-guide/parsers/#setting-the-parsers" target="_blank" rel="noopener">设置解析器</a></h2><p>可以使用该<code>DEFAULT_PARSER_CLASSES</code>设置全局设置默认的解析器集。例如，以下设置将仅允许带有<code>JSON</code>内容的请求，而不是默认的JSON或表单数据。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">REST_FRAMEWORK = &#123;</span><br><span class="line">    <span class="string">'DEFAULT_PARSER_CLASSES'</span>: [</span><br><span class="line">        <span class="string">'rest_framework.parsers.JSONParser'</span>,</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>您还可以使用<code>APIView</code>基于类的视图来设置用于单个视图或视图集的解析器。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> rest_framework.parsers <span class="keyword">import</span> JSONParser</span><br><span class="line"><span class="keyword">from</span> rest_framework.response <span class="keyword">import</span> Response</span><br><span class="line"><span class="keyword">from</span> rest_framework.views <span class="keyword">import</span> APIView</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ExampleView</span><span class="params">(APIView)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    A view that can accept POST requests with JSON content.</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    parser_classes = [JSONParser]</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">post</span><span class="params">(self, request, format=None)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> Response(&#123;<span class="string">'received data'</span>: request.data&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>或者，如果您将<code>@api_view</code>装饰器与基于函数的视图一起使用。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> rest_framework.decorators <span class="keyword">import</span> api_view</span><br><span class="line"><span class="keyword">from</span> rest_framework.decorators <span class="keyword">import</span> parser_classes</span><br><span class="line"><span class="keyword">from</span> rest_framework.parsers <span class="keyword">import</span> JSONParser</span><br><span class="line"></span><br><span class="line"><span class="meta">@api_view(['POST'])</span></span><br><span class="line"><span class="meta">@parser_classes([JSONParser])</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">example_view</span><span class="params">(request, format=None)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    A view that can accept POST requests with JSON content.</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="keyword">return</span> Response(&#123;<span class="string">'received data'</span>: request.data&#125;)</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="API参考"><a href="#API参考" class="headerlink" title="API参考"></a><a href="https://www.django-rest-framework.org/api-guide/parsers/#api-reference" target="_blank" rel="noopener">API参考</a></h1><h2 id="JSONParser"><a href="#JSONParser" class="headerlink" title="JSONParser"></a><a href="https://www.django-rest-framework.org/api-guide/parsers/#jsonparser" target="_blank" rel="noopener">JSONParser</a></h2><p>解析<code>JSON</code>请求内容。</p>
+<p><strong>.media_type</strong>：<code>application/json</code></p>
+<h2 id="FormParser"><a href="#FormParser" class="headerlink" title="FormParser"></a><a href="https://www.django-rest-framework.org/api-guide/parsers/#formparser" target="_blank" rel="noopener">FormParser</a></h2><p>解析HTML表单内容。 <code>request.data</code>将填充<code>QueryDict</code>的数据。</p>
+<p>您通常希望同时使用<code>FormParser</code>和两者，<code>MultiPartParser</code>以便完全支持HTML表单数据。</p>
+<p><strong>.media_type</strong>：<code>application/x-www-form-urlencoded</code></p>
+<h2 id="MultiPartParser"><a href="#MultiPartParser" class="headerlink" title="MultiPartParser"></a><a href="https://www.django-rest-framework.org/api-guide/parsers/#multipartparser" target="_blank" rel="noopener">MultiPartParser</a></h2><p>解析多部分HTML表单内容，支持文件上传。两者都<code>request.data</code>将填充<code>QueryDict</code>。</p>
+<p>您通常希望同时使用<code>FormParser</code>和两者，<code>MultiPartParser</code>以便完全支持HTML表单数据。</p>
+<p><strong>.media_type</strong>：<code>multipart/form-data</code></p>
+<h2 id="FileUploadParser"><a href="#FileUploadParser" class="headerlink" title="FileUploadParser"></a><a href="https://www.django-rest-framework.org/api-guide/parsers/#fileuploadparser" target="_blank" rel="noopener">FileUploadParser</a></h2><p>解析原始文件上传内容。该<code>request.data</code>属性将是一个字典，<code>&#39;file&#39;</code>其中包含包含上载文件的单个键。</p>
+<p>如果通过URL关键字参数<code>FileUploadParser</code>调用与with一起使用的视图<code>filename</code>，则该参数将用作文件名。</p>
+<p>如果在没有<code>filename</code>URL关键字参数的情况下调用它，则客户端必须在<code>Content-Disposition</code>HTTP标头中设置文件名。例如<code>Content-Disposition: attachment; filename=upload.jpg</code>。</p>
+<p><strong>.media_type</strong>：<code>*/*</code></p>
+<h5 id="笔记："><a href="#笔记：" class="headerlink" title="笔记："></a><a href="https://www.django-rest-framework.org/api-guide/parsers/#notes" target="_blank" rel="noopener">笔记：</a></h5><ul>
+<li>的<code>FileUploadParser</code>是与本地客户端的使用，可以将文件上传的原始数据请求。对于基于Web的上载，或者对于具有分段上载支持的本机客户端，应使用<code>MultiPartParser</code>代替。</li>
+<li>由于此解析器<code>media_type</code>匹配任何内容类型，<code>FileUploadParser</code>因此通常应该是API视图上设置的唯一解析器。</li>
+<li><code>FileUploadParser</code>遵守Django的标准<code>FILE_UPLOAD_HANDLERS</code>设置和<code>request.upload_handlers</code>属性。有关更多详细信息，请参见<a href="https://docs.djangoproject.com/en/stable/topics/http/file-uploads/#upload-handlers" target="_blank" rel="noopener">Django文档</a>。</li>
+</ul>
+<h5 id="基本用法示例："><a href="#基本用法示例：" class="headerlink" title="基本用法示例："></a><a href="https://www.django-rest-framework.org/api-guide/parsers/#basic-usage-example" target="_blank" rel="noopener">基本用法示例：</a></h5><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># views.py</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FileUploadView</span><span class="params">(views.APIView)</span>:</span></span><br><span class="line">    parser_classes = [FileUploadParser]</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">put</span><span class="params">(self, request, filename, format=None)</span>:</span></span><br><span class="line">        file_obj = request.data[<span class="string">'file'</span>]</span><br><span class="line">        <span class="comment"># ...</span></span><br><span class="line">        <span class="comment"># do some stuff with uploaded file</span></span><br><span class="line">        <span class="comment"># ...</span></span><br><span class="line">        <span class="keyword">return</span> Response(status=<span class="number">204</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># urls.py</span></span><br><span class="line">urlpatterns = [</span><br><span class="line">    <span class="comment"># ...</span></span><br><span class="line">    url(<span class="string">r'^upload/(?P&lt;filename&gt;[^/]+)$'</span>, FileUploadView.as_view())</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="自定义解析器"><a href="#自定义解析器" class="headerlink" title="自定义解析器"></a><a href="https://www.django-rest-framework.org/api-guide/parsers/#custom-parsers" target="_blank" rel="noopener">自定义解析器</a></h1><p>要实现自定义解析器，应重写<code>BaseParser</code>，设置<code>.media_type</code>属性并实现<code>.parse(self, stream, media_type, parser_context)</code>方法。</p>
+<p>该方法应返回将用于填充<code>request.data</code>属性的数据。</p>
+<p>传递给的参数<code>.parse()</code>是：</p>
+<h3 id="stream"><a href="#stream" class="headerlink" title="stream"></a><a href="https://www.django-rest-framework.org/api-guide/parsers/#stream" target="_blank" rel="noopener">stream</a></h3><p>类似于流的对象，表示请求的主体。</p>
+<h3 id="media-type"><a href="#media-type" class="headerlink" title="media_type"></a><a href="https://www.django-rest-framework.org/api-guide/parsers/#media_type" target="_blank" rel="noopener">media_type</a></h3><p>可选的。如果提供，这是传入请求内容的媒体类型。</p>
+<p>根据请求的<code>Content-Type:</code>header，它可能比渲染器的<code>media_type</code>属性更具体，并且可能包括媒体类型参数。例如<code>&quot;text/plain; charset=utf-8&quot;</code>。</p>
+<h3 id="parser-context"><a href="#parser-context" class="headerlink" title="parser_context"></a><a href="https://www.django-rest-framework.org/api-guide/parsers/#parser_context" target="_blank" rel="noopener">parser_context</a></h3><p>可选的。如果提供，则此参数将是一个字典，其中包含解析请求内容可能需要的任何其他上下文。</p>
+<p>默认情况下，这将包括以下键：<code>view</code>，<code>request</code>，<code>args</code>，<code>kwargs</code>。</p>
+<h2 id="例"><a href="#例" class="headerlink" title="例"></a><a href="https://www.django-rest-framework.org/api-guide/parsers/#example" target="_blank" rel="noopener">例</a></h2><p>下面是一个示例纯文本解析器，它将<code>request.data</code>使用代表请求主体的字符串填充属性。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PlainTextParser</span><span class="params">(BaseParser)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Plain text parser.</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    media_type = <span class="string">'text/plain'</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">parse</span><span class="params">(self, stream, media_type=None, parser_context=None)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        Simply return a string representing the body of the request.</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">return</span> stream.read()</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="第三方软件包"><a href="#第三方软件包" class="headerlink" title="第三方软件包"></a><a href="https://www.django-rest-framework.org/api-guide/parsers/#third-party-packages" target="_blank" rel="noopener">第三方软件包</a></h1><p>以下第三方软件包也可用。</p>
+<h2 id="YAML"><a href="#YAML" class="headerlink" title="YAML"></a><a href="https://www.django-rest-framework.org/api-guide/parsers/#yaml" target="_blank" rel="noopener">YAML</a></h2><p><a href="https://jpadilla.github.io/django-rest-framework-yaml/" target="_blank" rel="noopener">REST框架YAML</a>提供了<a href="http://www.yaml.org/" target="_blank" rel="noopener">YAML</a>解析和渲染支持。它以前直接包含在REST框架程序包中，现在已作为第三方程序包受支持。</p>
+<h4 id="安装与配置"><a href="#安装与配置" class="headerlink" title="安装与配置"></a><a href="https://www.django-rest-framework.org/api-guide/parsers/#installation-configuration" target="_blank" rel="noopener">安装与配置</a></h4><p>使用pip安装。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">$ pip install djangorestframework-yaml</span><br></pre></td></tr></table></figure>
+
+<p>修改您的REST框架设置。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">REST_FRAMEWORK = &#123;</span><br><span class="line">    <span class="string">'DEFAULT_PARSER_CLASSES'</span>: [</span><br><span class="line">        <span class="string">'rest_framework_yaml.parsers.YAMLParser'</span>,</span><br><span class="line">    ],</span><br><span class="line">    <span class="string">'DEFAULT_RENDERER_CLASSES'</span>: [</span><br><span class="line">        <span class="string">'rest_framework_yaml.renderers.YAMLRenderer'</span>,</span><br><span class="line">    ],</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="XML格式"><a href="#XML格式" class="headerlink" title="XML格式"></a><a href="https://www.django-rest-framework.org/api-guide/parsers/#xml" target="_blank" rel="noopener">XML格式</a></h2><p><a href="https://jpadilla.github.io/django-rest-framework-xml/" target="_blank" rel="noopener">REST Framework XML</a>提供了一种简单的非正式XML格式。它以前直接包含在REST框架程序包中，现在已作为第三方程序包受支持。</p>
+<h4 id="安装与配置-1"><a href="#安装与配置-1" class="headerlink" title="安装与配置"></a><a href="https://www.django-rest-framework.org/api-guide/parsers/#installation-configuration_1" target="_blank" rel="noopener">安装与配置</a></h4><p>使用pip安装。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">$ pip install djangorestframework-xml</span><br></pre></td></tr></table></figure>
+
+<p>修改您的REST框架设置。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">REST_FRAMEWORK = &#123;</span><br><span class="line">    <span class="string">'DEFAULT_PARSER_CLASSES'</span>: [</span><br><span class="line">        <span class="string">'rest_framework_xml.parsers.XMLParser'</span>,</span><br><span class="line">    ],</span><br><span class="line">    <span class="string">'DEFAULT_RENDERER_CLASSES'</span>: [</span><br><span class="line">        <span class="string">'rest_framework_xml.renderers.XMLRenderer'</span>,</span><br><span class="line">    ],</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="消息包"><a href="#消息包" class="headerlink" title="消息包"></a><a href="https://www.django-rest-framework.org/api-guide/parsers/#messagepack" target="_blank" rel="noopener">消息包</a></h2><p><a href="https://github.com/juanriaza/django-rest-framework-msgpack" target="_blank" rel="noopener">MessagePack</a>是一种快速，高效的二进制序列化格式。 <a href="https://github.com/juanriaza" target="_blank" rel="noopener">Juan Riaza</a>维护<a href="https://github.com/juanriaza/django-rest-framework-msgpack" target="_blank" rel="noopener">djangorestframework-msgpack</a>软件包，该软件包为REST框架提供MessagePack渲染器和解析器支持。</p>
+<h2 id="CamelCase-JSON"><a href="#CamelCase-JSON" class="headerlink" title="CamelCase JSON"></a><a href="https://www.django-rest-framework.org/api-guide/parsers/#camelcase-json" target="_blank" rel="noopener">CamelCase JSON</a></h2><p><a href="https://github.com/vbabiy/djangorestframework-camel-case" target="_blank" rel="noopener">djangorestframework-camel-case</a>提供REST框架<a href="https://github.com/vbabiy/djangorestframework-camel-case" target="_blank" rel="noopener">的驼峰式</a> JSON渲染器和解析器。这允许序列化程序使用Python样式的带下划线的字段名称，但在API中以Javascript样式的驼峰式大小写字段名称公开。它由<a href="https://github.com/vbabiy" target="_blank" rel="noopener">Vitaly Babiy</a>维护。</p>
+]]></content>
+      <categories>
+        <category>Django</category>
+        <category>Django-Rest-framework</category>
+      </categories>
+      <tags>
+        <tag>restful</tag>
+        <tag>Django</tag>
+        <tag>Django-Rest-framework</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Django REST framework:Routers</title>
     <url>/2020-01-15-Routers.html</url>
     <content><![CDATA[<p>资源路由允许您快速声明给定资源控制器的所有通用路由。无需为索引声明单独的路由，而是在单行代码中声明资源丰富的路由。</p>
