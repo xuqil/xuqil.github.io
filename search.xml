@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>Django REST framework:Parsers</title>
-    <url>/2020-01-16-Parsers.html</url>
+    <url>/blog/2020-01-16-Parsers.html</url>
     <content><![CDATA[<p>机器交互Web服务倾向于使用比表单编码更多的结构化格式来发送数据，因为它们发送的数据比简单表单还要复杂。</p>
 <a id="more"></a>
 
@@ -89,7 +89,7 @@
   </entry>
   <entry>
     <title>Django REST framework:Routers</title>
-    <url>/2020-01-15-Routers.html</url>
+    <url>/blog/2020-01-15-Routers.html</url>
     <content><![CDATA[<p>资源路由允许您快速声明给定资源控制器的所有通用路由。无需为索引声明单独的路由，而是在单行代码中声明资源丰富的路由。</p>
 <a id="more"></a>
 
@@ -379,7 +379,7 @@
   </entry>
   <entry>
     <title>Django REST framework:ViewsSets</title>
-    <url>/2020-01-15-ViewsSets.html</url>
+    <url>/blog/2020-01-15-ViewsSets.html</url>
     <content><![CDATA[<p>在路由确定了要用于请求的控制器之后，您的控制器负责理解请求并产生适当的输出。</p>
 <a id="more"></a>
 
@@ -489,7 +489,7 @@
   </entry>
   <entry>
     <title>Django REST framework:Generic Views</title>
-    <url>/2020-01-15-generic-views.html</url>
+    <url>/blog/2020-01-15-generic-views.html</url>
     <content><![CDATA[<p>Django的通用视图…是作为通用用法模式的快捷方式而开发的…它们采用视图开发中发现的某些通用习语和模式并将其抽象化，以便您可以快速编写通用数据视图而无需重复自己。</p>
 <a id="more"></a>
 
@@ -658,7 +658,7 @@
   </entry>
   <entry>
     <title>Django REST framework:Views</title>
-    <url>/2020-01-15-Views.html</url>
+    <url>/blog/2020-01-15-Views.html</url>
     <content><![CDATA[<p>Django的基于类的视图是对旧式视图的欢迎。</p>
 <a id="more"></a>
 
@@ -740,7 +740,7 @@
   </entry>
   <entry>
     <title>Django REST framework:Responses</title>
-    <url>/2020-01-15-Responses.html</url>
+    <url>/blog/2020-01-15-Responses.html</url>
     <content><![CDATA[<p>与基本的HttpResponse对象不同，TemplateResponse对象保留视图提供的上下文详细信息以计算响应。直到需要时才在响应过程的后面计算响应的最终输出。</p>
 <a id="more"></a>
 
@@ -797,7 +797,7 @@
   </entry>
   <entry>
     <title>Django REST framework:Request</title>
-    <url>/2020-01-14-requst.html</url>
+    <url>/blog/2020-01-14-requst.html</url>
     <content><![CDATA[<p>REST框架的<code>Request</code>类扩展了标准<code>HttpRequest</code>，增加了对REST框架的灵活请求解析和请求身份验证的支持。</p>
 <a id="more"></a>
 
@@ -871,7 +871,7 @@
   </entry>
   <entry>
     <title>Kubernetes:Ingress的使用</title>
-    <url>/2020-01-06-Ingress%E7%9A%84%E4%BD%BF%E7%94%A8.html</url>
+    <url>/blog/2020-01-06-Ingress%E7%9A%84%E4%BD%BF%E7%94%A8.html</url>
     <content><![CDATA[<h1 id="ingress的基本使用"><a href="#ingress的基本使用" class="headerlink" title="ingress的基本使用"></a>ingress的基本使用</h1><p><a href="https://kubernetes.github.io/ingress-nginx/deploy/#bare-metal" target="_blank" rel="noopener">nginx ingress官网</a></p>
 <p><a href="https://kubernetes.io/docs/concepts/services-networking/ingress/" target="_blank" rel="noopener">kubernetes ingress介绍</a></p>
 <p><code>ingress</code>相当于<code>nginx</code>代理服务，在定义 <code>Ingress</code>策略之前，需要先部署<code>Ingress Controller</code>，以实现为所有后端 <code>Service</code> 提供一个统一的入口。</p>
