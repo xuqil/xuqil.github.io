@@ -1,6 +1,225 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>hexo添加本地图片</title>
+    <url>/blog/2020-02-24-hexo-pictures.html</url>
+    <content><![CDATA[<p>hexo添加本地图片</p>
+<a id="more"></a>
+
+<h1 id="hexo添加本地图片"><a href="#hexo添加本地图片" class="headerlink" title="hexo添加本地图片"></a>hexo添加本地图片</h1><p>1、 把主页配置文件<code>_config.yml</code> 里的<code>post_asset_folder:</code>这个选项设置为<code>true</code></p>
+<p>2 、安装一个可以上传本地图片的插件<code>npm install hexo-asset-image --save</code></p>
+<p>3 、在<code>/source/_posts</code>文件夹发文位置操作，新建一个名称和文章的文件名相同的目录，该目录和文章文件同级</p>
+<p><img src="/blog/2020-02-24-hexo-pictures/demo.png" alt="image-20200224134015358"></p>
+<p>4、在文章中引入图片。把文章<code>hexo-add-pictures.md</code>想要添加的图片全部放在<code>hexo-add-pictures</code>这个文件夹，然后再文章中就可以按照markdown的格式引入图片了：</p>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">![<span class="string">你想输入的替代文字</span>](<span class="link">文章文件名称/图片名.jpg</span>)</span><br><span class="line"></span><br><span class="line">例如![<span class="string">image-20200224134015358</span>](<span class="link">./hexo-add-pictures/demo.png</span>)</span><br></pre></td></tr></table></figure>
+
+<p>5、最后就可以在文章中看到图片了</p>
+]]></content>
+      <categories>
+        <category>hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Vue原理之webpack配置Vue</title>
+    <url>/blog/2020-02-24-vue-webpack.html</url>
+    <content><![CDATA[<p>webpack 可以帮助我们进行模块化和处理模块间的各种复杂关系，而打包则是将 webpack 中的各种资源模块进行打包合并成一个或多个包(Bundle)</p>
+<a id="more"></a>
+
+<h1 id="Vue原理之webpack配置Vue"><a href="#Vue原理之webpack配置Vue" class="headerlink" title="Vue原理之webpack配置Vue"></a>Vue原理之webpack配置Vue</h1><blockquote>
+<p>提示：所有命令在项目根命令下执行</p>
+</blockquote>
+<p>webpack 可以帮助我们进行模块化和处理模块间的各种复杂关系，而打包则是将 webpack 中的各种资源模块进行打包合并成一个或多个包(Bundle)，并且在打包的过程中，还可以对资源进行处理，比如压缩图片，将 scss 转成 css，将 ES6 语法转成 ES5 语法，将 TypeScript 转成 JavaScript 等操作。使用webpack，可以使Vue模块化开发，支持<code>.vue</code>后缀组件开发。</p>
+<h2 id="配置webpack"><a href="#配置webpack" class="headerlink" title="配置webpack"></a>配置webpack</h2><blockquote>
+<p>提示：安装 webpack 首先需要安装 Node.js，Node.js 自带了软件包管理工具 npm</p>
+</blockquote>
+<h4 id="新建项目"><a href="#新建项目" class="headerlink" title="新建项目"></a>新建项目</h4><p>新建一个目录结构如图的项目</p>
+<p><img src="/blog/2020-02-24-vue-webpack/new-project.png" alt="image-20200224111405324"></p>
+<p>说明：</p>
+<ul>
+<li><p>dist：构建产物，最终部署到服务器的js文件</p>
+</li>
+<li><p>src：开发目录</p>
+<ul>
+<li>src/img：存放图片文件的目录</li>
+<li>src/vue：存放vue组件的目录</li>
+<li>src/main.js：vue入口文件</li>
+</ul>
+</li>
+<li><p>index.html：主页，最终部署到服务器的html文件</p>
+</li>
+<li><p>webpack.config.js：webpack的配置文件</p>
+</li>
+</ul>
+<h4 id="编写webpack配置文件"><a href="#编写webpack配置文件" class="headerlink" title="编写webpack配置文件"></a>编写webpack配置文件</h4><p>webpack.config.js</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">"path"</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    entry: <span class="string">"./src/main.js"</span>, <span class="comment">//入口文件</span></span><br><span class="line">    output: &#123;</span><br><span class="line">        path: path.resolve(__dirname, <span class="string">"dist"</span>), <span class="comment">//获取dist的绝对路径</span></span><br><span class="line">        filename: <span class="string">"bundle.js"</span> <span class="comment">//输出js产物，需要在index.html引用</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="初始化node环境"><a href="#初始化node环境" class="headerlink" title="初始化node环境"></a>初始化node环境</h4><ul>
+<li>执行命令：</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">npm init</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>按照提示填写内容</li>
+</ul>
+<p><img src="/blog/2020-02-24-vue-webpack/npm-init.png" alt="image-20200224112046431"></p>
+<ul>
+<li>在新生成的package.json添加构建命令</li>
+</ul>
+<p><img src="/blog/2020-02-24-vue-webpack/build-cmd.png" alt="image-20200224112310776"></p>
+<h4 id="安装本地webpack"><a href="#安装本地webpack" class="headerlink" title="安装本地webpack"></a>安装本地webpack</h4><p>执行命令</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">npm install webpack --save-dev</span><br></pre></td></tr></table></figure>
+
+<p>可以指定版本，这里默认安装的是4.41.6版本</p>
+<h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4><ul>
+<li>在main.js中编写测试语句</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">"webpack-vue"</span>)</span><br><span class="line"><span class="built_in">document</span>.writeln(<span class="string">"&lt;h1&gt;Hello world!&lt;/h1&gt;"</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>执行构建命令</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">npm run build</span><br></pre></td></tr></table></figure>
+
+<p>这时会提示是否安装webpack-cli</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">We will use <span class="string">"npm"</span> to install the CLI via <span class="string">"npm install -D"</span>.</span><br><span class="line">Do you want to install <span class="string">'webpack-cli'</span> (yes/no): yes</span><br></pre></td></tr></table></figure>
+
+<p>选择<code>yes</code></p>
+<p>命令执行完成后出现警告：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">The <span class="string">'mode'</span> option has not been <span class="keyword">set</span>, webpack will fallback to 'production' for this value. Set 'mode' option to 'development' or 'production' to enable defaults for each environment.</span><br></pre></td></tr></table></figure>
+
+<p>这是让我们在<code>webpack-config.js</code>配置文件中配置开发或者生产环境，我们选择开发环境：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">"path"</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    entry: <span class="string">"./src/main.js"</span>, <span class="comment">//入口文件</span></span><br><span class="line">    mode: <span class="string">'development'</span>, <span class="comment">//配置为开发环境模式</span></span><br><span class="line">    <span class="comment">// ...other</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>然后再执行一遍<code>npm run build</code></p>
+<p>这时dist新生成了发布产物<code>bundle.js</code></p>
+<ul>
+<li>在浏览器打开index.html文件</li>
+</ul>
+<p><img src="/blog/2020-02-24-vue-webpack/show-test.png" alt="image-20200224112806078"></p>
+<p>那么webpack安装成功</p>
+<h4 id="配置loader"><a href="#配置loader" class="headerlink" title="配置loader"></a>配置loader</h4><p>[webpack-loader官网][<a href="https://www.webpackjs.com/loaders/]" target="_blank" rel="noopener">https://www.webpackjs.com/loaders/]</a></p>
+<p>webpack 可以使用 <a href="https://www.webpackjs.com/concepts/loaders" target="_blank" rel="noopener">loader</a> 来预处理文件。这允许你打包除 JavaScript 之外的任何静态资源。你可以使用 Node.js 来很简单地编写自己的 loader。</p>
+<p>loader 通过在 <code>require()</code> 语句中使用 <code>loadername!</code> 前缀来激活，或者通过 webpack 配置中的正则表达式来自动应用 </p>
+<p>需要配置的loader有：url-loader、css-loader、style-loader和ES6转ES6相关的loader</p>
+<h5 id="样式loader"><a href="#样式loader" class="headerlink" title="样式loader"></a>样式loader</h5><ul>
+<li>安装</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">npm install style-loader css-loader --save-dev</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>配置</li>
+</ul>
+<p><strong>webpack.config.js</strong></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="built_in">module</span>: &#123;</span><br><span class="line">     <span class="comment">// other </span></span><br><span class="line">    rules: [</span><br><span class="line">      &#123;</span><br><span class="line">        test: <span class="regexp">/\.css$/</span>,</span><br><span class="line">        use: [ <span class="string">'style-loader'</span>, <span class="string">'css-loader'</span> ]</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="图片loader"><a href="#图片loader" class="headerlink" title="图片loader"></a>图片loader</h5><ul>
+<li>安装</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">npm install --save-dev url-loader file-loader</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>配置</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> path = require(<span class="string">"path"</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span>.<span class="keyword">exports</span> = &#123;</span><br><span class="line">    entry: <span class="string">"./src/main.js"</span>, <span class="comment">//入口文件</span></span><br><span class="line">    mode: <span class="string">'development'</span>, <span class="comment">//配置为开发环境模式</span></span><br><span class="line">    output: &#123;</span><br><span class="line">        path: path.resolve(__dirname, <span class="string">"dist"</span>), <span class="comment">//获取dist的绝对路径</span></span><br><span class="line">        filename: <span class="string">"bundle.js"</span>, <span class="comment">//输出js产物，需要在index.html引用</span></span><br><span class="line">        publicPath: <span class="string">"dist/"</span> <span class="comment">//图片产出的路径</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="keyword">module</span>: &#123;</span><br><span class="line">        <span class="comment">// other </span></span><br><span class="line">       rules: [</span><br><span class="line">         <span class="comment">// 样式loader</span></span><br><span class="line">         &#123;</span><br><span class="line">           test: /\.css$/,</span><br><span class="line">           use: [ <span class="string">'style-loader'</span>, <span class="string">'css-loader'</span> ]</span><br><span class="line">         &#125;,</span><br><span class="line">         <span class="comment">// 图片loader</span></span><br><span class="line">         &#123;</span><br><span class="line">            test: /\.(png|jpg|gif)$/,</span><br><span class="line">            use: [&#123;</span><br><span class="line">                loader: <span class="string">'url-loader'</span>,</span><br><span class="line">                options: &#123;</span><br><span class="line">                    <span class="comment">// 文件小于limit时使用这个，生产一个base64的URL</span></span><br><span class="line">                    <span class="comment">// 文件大于limit时使用默认的file，使用hash编码，记得配置publicPath: "dist/"</span></span><br><span class="line">                    limit: <span class="number">13000</span>,</span><br><span class="line">                    name: <span class="string">'img/[name].[hash:7].[ext]'</span>, <span class="comment">//文件名称和存放位置</span></span><br><span class="line">                &#125;</span><br><span class="line">              &#125;</span><br><span class="line">            ]</span><br><span class="line">      &#125;</span><br><span class="line">    ]&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>提示：需要添加<code>publicPath: &quot;dist/&quot;</code>配置</p>
+</blockquote>
+<h5 id="ES6转ES5的loader"><a href="#ES6转ES5的loader" class="headerlink" title="ES6转ES5的loader"></a>ES6转ES5的loader</h5><ul>
+<li>安装</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">npm install babel-loader@<span class="number">8.0</span><span class="number">.0</span>-beta<span class="number">.0</span> @babel/core @babel/preset-env --save-dev</span><br><span class="line">npm install babel-loader babel-core babel-preset-env --save-dev</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>配置</li>
+</ul>
+<p>在 webpack 配置对象中，需要添加 babel-loader 到 module 的 loaders 列表中，像下面这样：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">module</span>: &#123;</span><br><span class="line">  rules: [</span><br><span class="line">      <span class="comment">// other</span></span><br><span class="line">    &#123;</span><br><span class="line">      test: <span class="regexp">/\.js$/</span>,</span><br><span class="line">      exclude: <span class="regexp">/(node_modules|bower_components)/</span>, </span><br><span class="line">      use: &#123;</span><br><span class="line">        loader: <span class="string">'babel-loader'</span>,</span><br><span class="line">        options: &#123;</span><br><span class="line">          presets: [<span class="string">'@babel/preset-env'</span>]</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="测试-1"><a href="#测试-1" class="headerlink" title="测试"></a>测试</h5><ul>
+<li><p>在<code>src/img</code>中添加一张图片<code>test.jpg</code>，大小随便</p>
+</li>
+<li><p>在src中新建文件夹css，添加<code>main.css</code>文件</p>
+</li>
+</ul>
+<p><strong>main.css</strong></p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">body</span>&#123;</span><br><span class="line">    background: url("../img/test.jpg"); // 图片背景</span><br><span class="line">    <span class="selector-tag">font-size</span>: 40<span class="selector-tag">px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在<code>src/main.js</code>中引用css和添加测试EC6转ES5语句</li>
+</ul>
+<p><strong>main.js</strong></p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">"webpack-vue"</span>)</span><br><span class="line"><span class="built_in">document</span>.writeln(<span class="string">"&lt;h1&gt;Hello world!&lt;/h1&gt;"</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> name = <span class="string">"vue"</span>  <span class="comment">//使用ES6规范const</span></span><br><span class="line"><span class="keyword">const</span> year = <span class="string">"2020"</span> <span class="comment">//使用ES6规范</span></span><br><span class="line"><span class="built_in">require</span>(<span class="string">"./css/main.css"</span>) <span class="comment">//引用css文件</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>执行构建命令<code>npm run build</code></li>
+</ul>
+<p>现在我们可以在<code>dist/img</code>文件下看到图片产物，<code>dist/bundle.js</code>中也没有了ES6规范定义的<code>const</code>，转为了<code>var</code>关键词</p>
+<p>用浏览器打开<code>index.html</code>发现出现了图片背景以及字体变大了</p>
+<h2 id="安装Vue"><a href="#安装Vue" class="headerlink" title="安装Vue"></a>安装Vue</h2><blockquote>
+<p>提示：发布时依赖Vue</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">npm install vue --save</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="引入Vue"><a href="#引入Vue" class="headerlink" title="引入Vue"></a>引入Vue</h2><p>main.js文件</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 导入Vue</span></span><br><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">"vue"</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    el: <span class="string">"#app"</span>,</span><br><span class="line">    data: &#123;</span><br><span class="line">        message: <span class="string">"Hello Vue"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置Vue"><a href="#配置Vue" class="headerlink" title="配置Vue"></a>配置Vue</h2><p>webpack.config.js文件</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">const path = require("path")</span><br><span class="line"></span><br><span class="line">module.exports = &#123;</span><br><span class="line">    entry: "./src/main.js",</span><br><span class="line">    output: &#123;</span><br><span class="line">        path: path.resolve(__dirname, "dist"),</span><br><span class="line">        filename: "bundle.js",</span><br><span class="line">        publicPath: "dist/"</span><br><span class="line">    &#125;,</span><br><span class="line">    module: &#123;</span><br><span class="line">        rules: [&#123;</span><br><span class="line">                test: /\.css$/,</span><br><span class="line">                use: ['style-loader', 'css-loader']</span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">                test: /\.(png|jpg|gif)$/,</span><br><span class="line">                use: [&#123;</span><br><span class="line">                    loader: 'url-loader',</span><br><span class="line">                    options: &#123;</span><br><span class="line">                        <span class="comment">// 文件小于limit时使用这个，生产一个base64的URL</span></span><br><span class="line">                        <span class="comment">// 文件大于limit时使用默认的file，使用hash编码，记得配置publicPath: "dist/"</span></span><br><span class="line">                        limit: 13000,</span><br><span class="line">                        name: 'img/[name].[hash:7].[ext]',</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;]</span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">                test: /\.js$/,</span><br><span class="line">                exclude: /(node_modules|bower_components)/,</span><br><span class="line">                use: &#123;</span><br><span class="line">                    loader: 'babel-loader',</span><br><span class="line">                    options: &#123;</span><br><span class="line">                        presets: ['@babel/preset-env']</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 解决Vue编译出错问题不能显示问题</span></span><br><span class="line">    resolve: &#123;</span><br><span class="line">        alias: &#123;</span><br><span class="line">            "vue$": "vue/dist/vue.esm.js"</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="简单使用Vue"><a href="#简单使用Vue" class="headerlink" title="简单使用Vue"></a>简单使用Vue</h2><p>index.html文件</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">        &#123;&#123;message&#125;&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"./dist/bundle.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--该文件不能放在head元素--&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>执行命令<code>npm run build</code>后在页面看到”Hello Vue”文字</p>
+<h2 id="使用-vue文件模块化开发"><a href="#使用-vue文件模块化开发" class="headerlink" title="使用.vue文件模块化开发"></a>使用<code>.vue</code>文件模块化开发</h2><blockquote>
+<p> 提示：index.html的<code>&lt;div id=&quot;app&quot;&gt;&lt;/div&gt;</code>会被Vue的模板自动替换，所以不需要改动index.html文件的任何内容</p>
+</blockquote>
+<h3 id="安装vue-loader"><a href="#安装vue-loader" class="headerlink" title="安装vue-loader"></a>安装<code>vue-loader</code></h3><p>[vue-loader官方网站][<a href="https://vue-loader.vuejs.org/guide/#manual-setup]" target="_blank" rel="noopener">https://vue-loader.vuejs.org/guide/#manual-setup]</a></p>
+<p>执行命令：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">npm install --save-dev vue-loader vue-template-compiler</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置vue-loader"><a href="#配置vue-loader" class="headerlink" title="配置vue-loader"></a>配置<code>vue-loader</code></h3><p>webpack.config.js文件</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="comment">//other...</span></span><br><span class="line">const VueLoaderPlugin = require('vue-loader/lib/plugin')</span><br><span class="line"></span><br><span class="line">module.exports = &#123;</span><br><span class="line">  module: &#123;</span><br><span class="line">    rules: [</span><br><span class="line">      <span class="comment">// ... other rules</span></span><br><span class="line">      &#123;</span><br><span class="line">        test: /\.vue$/,</span><br><span class="line">        loader: 'vue-loader'</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">  plugins: [</span><br><span class="line">    <span class="comment">// make sure to include the plugin!</span></span><br><span class="line">    new VueLoaderPlugin()</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="使用-vue格式文件开发"><a href="#使用-vue格式文件开发" class="headerlink" title="使用.vue格式文件开发"></a>使用<code>.vue</code>格式文件开发</h3><p>新建App.vue：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">&lt;div class&#x3D;&quot;cpn&quot;&gt;</span><br><span class="line">    &lt;h1&gt;&#123;&#123; name &#125;&#125;&lt;&#x2F;h1&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;template&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">    data() &#123;</span><br><span class="line">        return &#123;</span><br><span class="line">            name: &quot;我是子组件&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;style scope&gt;</span><br><span class="line">.cpn &#123;</span><br><span class="line">color: red;</span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;style&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="使用组件"><a href="#使用组件" class="headerlink" title="使用组件"></a>使用组件</h3><p>main.js</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 导入Vue</span></span><br><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">"vue"</span></span><br><span class="line"><span class="keyword">import</span> App <span class="keyword">from</span> <span class="string">"./vue/App.vue"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    el: <span class="string">"#app"</span>,</span><br><span class="line">    template: <span class="string">`</span></span><br><span class="line"><span class="string">        &lt;App&gt;&lt;/App&gt; //使用组件</span></span><br><span class="line"><span class="string">    `</span>,</span><br><span class="line">    data: &#123;</span><br><span class="line">        message: <span class="string">"Hello Vue"</span></span><br><span class="line">    &#125;,</span><br><span class="line">    components: &#123;</span><br><span class="line">        App</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h3><p>执行命令：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">npm run build</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="省略引入文件后缀"><a href="#省略引入文件后缀" class="headerlink" title="省略引入文件后缀"></a>省略引入文件后缀</h3><p>webpack.config.js文件</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="comment">//other...</span></span><br><span class="line"></span><br><span class="line">module.exports = &#123;</span><br><span class="line">  module: &#123;</span><br><span class="line">    rules: [</span><br><span class="line">      <span class="comment">// ... other rules</span></span><br><span class="line">      &#123;</span><br><span class="line">        test: /\.vue$/,</span><br><span class="line">        loader: 'vue-loader'</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line"><span class="comment">// ... other rules</span></span><br><span class="line">    <span class="comment">// 解决Vue编译出错问题不能显示问题</span></span><br><span class="line">    resolve: &#123;</span><br><span class="line">        extensions: [".css", ".js", ".vue"],//省略后缀</span><br><span class="line">        alias: &#123;</span><br><span class="line">            "vue$": "vue/dist/vue.esm.js"</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>现在可以省略后缀了</p>
+<p>main.js文件</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 导入Vue</span></span><br><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">"vue"</span></span><br><span class="line"><span class="keyword">import</span> App <span class="keyword">from</span> <span class="string">"./vue/App"</span> <span class="comment">// 省略.vue后缀</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    el: <span class="string">"#app"</span>,</span><br><span class="line">    template: <span class="string">`</span></span><br><span class="line"><span class="string">        &lt;App&gt;&lt;/App&gt;</span></span><br><span class="line"><span class="string">    `</span>,</span><br><span class="line">    data: &#123;</span><br><span class="line">        message: <span class="string">"Hello Vue"</span></span><br><span class="line">    &#125;,</span><br><span class="line">    components: &#123;</span><br><span class="line">        App</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Vue</category>
+      </categories>
+      <tags>
+        <tag>Vue</tag>
+        <tag>webpack</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>作用域插槽</title>
     <url>/blog/2020-02-23-scope-slots.html</url>
     <content><![CDATA[<p>有时让插槽内容能够访问子组件中才有的数据是很有用的。例如，设想一个带有如下模板的<code>&lt;current-user&gt;</code> 组件</p>
